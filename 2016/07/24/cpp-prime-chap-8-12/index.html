@@ -1,0 +1,891 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="c++," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="备忘录" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="IO类1.宽字符版本的类型和函数的名字以一个w开始。
+2.我们不能将形参或返回类型设置为流类型， 进行io操作的函数以引用方式传递和返回流。
+3.确定一个流对象的状态的最简单的方法是将它当作 一个条件来使用： while(cin &amp;gt;&amp;gt; word) 如果流状态正常那么循环继续。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Note in c++ prime 5th (chap8-12)">
+<meta property="og:url" content="https://luengzeegin.github.io/2016/07/24/cpp-prime-chap-8-12/index.html">
+<meta property="og:site_name" content="备忘录">
+<meta property="og:description" content="IO类1.宽字符版本的类型和函数的名字以一个w开始。
+2.我们不能将形参或返回类型设置为流类型， 进行io操作的函数以引用方式传递和返回流。
+3.确定一个流对象的状态的最简单的方法是将它当作 一个条件来使用： while(cin &amp;gt;&amp;gt; word) 如果流状态正常那么循环继续。">
+<meta property="og:updated_time" content="2017-02-15T12:00:39.281Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Note in c++ prime 5th (chap8-12)">
+<meta name="twitter:description" content="IO类1.宽字符版本的类型和函数的名字以一个w开始。
+2.我们不能将形参或返回类型设置为流类型， 进行io操作的函数以引用方式传递和返回流。
+3.确定一个流对象的状态的最简单的方法是将它当作 一个条件来使用： while(cin &amp;gt;&amp;gt; word) 如果流状态正常那么循环继续。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://luengzeegin.github.io/2016/07/24/cpp-prime-chap-8-12/"/>
+
+  <title> Note in c++ prime 5th (chap8-12) | 备忘录 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">备忘录</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">苟利国家生死以，岂因祸福避趋之。</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '5KNqcS_qiVtdSPs-g3YH','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Note in c++ prime 5th (chap8-12)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-24T17:35:44+08:00" content="2016-07-24">
+              2016-07-24
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/24/cpp-prime-chap-8-12/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/24/cpp-prime-chap-8-12/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="IO类">IO类</h2><p>1.宽字符版本的类型和函数的名字以一个w开始。</p>
+<p>2.我们不能将形参或返回类型设置为流类型， 进行io操作的函数以引用方式传递和返回流。</p>
+<p>3.确定一个流对象的状态的最简单的方法是将它当作 一个条件来使用： while(cin &gt;&gt; word) 如果流状态正常那么循环继续。</p>
+<a id="more"></a>
+<p>4.流对象的成员clear是重载的，不接受参数的版本清除所有错误标志位，带参数的版本接受一个iostate值，表示流的新状态。<br>例:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cin</span>.clear(<span class="built_in">cin</span>.rastate() &amp; ~<span class="built_in">cin</span>.failbit &amp; ~<span class="built_in">cin</span>.badbit);</span><br><span class="line"><span class="comment">// 首先先用rastate读出当前条件的状态</span></span><br><span class="line"><span class="comment">// 将failbit、badbit 复位 eofbit不变</span></span><br></pre></td></tr></table></figure>
+<p>5.io库类型和头文件，详见c++ prime 5th 中文版的278页。</p>
+<p>6.io库的条件状态，详见c++ prime 5th 中文版的279页。</p>
+<p>7.io库定义了4个iostate的constexpr的值来表示 特定的io条件，详见 c++ prime 5th 中文版的280页。</p>
+<p>8.判断io 类stirng流各种字符的类型，详见c++ prime 5th 中文版的82页。</p>
+<h2 id="输出缓冲">输出缓冲</h2><p>1.flush 刷新缓冲区，不附加任何字符。</p>
+<p>2.endl 输出一个换行然后刷新缓冲区。</p>
+<p>3.ends 输出一个空字符，然后刷新缓冲区。</p>
+<p>4.如果想每次输出操作之后都进行一个flush操作， 可以使用unitbuf操纵符，它让流对象每次写操作之后 都进行一次flush，而对应的 nounitbuf 操纵符则恢复流的正常缓冲区管理机制。值得一提的是 cerr 默认是设置untibuf。</p>
+<p>例 ： cout &lt;&lt; unitbuf；</p>
+<p>5.当调试一个已经崩溃的程序时，需要确认那些你认为已经输出的数据确实已经刷新了。因为实际上代码已经执行了，只是程序崩溃后缓冲区没有被刷新，输出数据被挂起没有打印。</p>
+<p>6.关联的输入流和输出流，在读操作之前，用户提示的信息都会被打印出来。</p>
+<p>7.我们使用io类里面的 tie 成员来关联输入流和输出流，tie 是个重载的对象，不带参数的版本，如果该对象关联到输出流那么返回这个流的指针，如果没有关联到流那么返回空指针。带参数的版本接受一个ostream对象的指针，将调用的对象绑定这个ostream对象。<br>例 ：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cin</span>.tie(&amp;<span class="built_in">cerr</span>) <span class="comment">// 使cin绑定cerr</span></span><br><span class="line">ostream *<span class="keyword">old_t</span>ie = <span class="built_in">cin</span>.tie() ; <span class="comment">//返回cout的指针</span></span><br><span class="line">iostream test;</span><br><span class="line">test.tie(<span class="keyword">old_t</span>ie); <span class="comment">// test与cout联系。</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="文件流对象">文件流对象</h2><p>1.当一个fstream类对象离开其作用域，与之关联的文件会自动关闭，(每次循环内就是一个作用域?)。</p>
+<p>2.open成员函数用于把一个空的文件流对象和文件关联起来，同理close则是关闭关联的流对象。</p>
+<p>3.当一个fstream对象被销毁时，close会自动被调用。</p>
+<p>4.检验调用open是否成功，可以类比cin if(open)。</p>
+<h2 id="文件模式">文件模式</h2><p>1.trunc模式截断文件，如果需要保留内容 则需显示声明app模式。<br>例：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ofstream <span class="title">app</span> <span class="params">("file", ofstream::app)</span></span>;  </span><br><span class="line">	<span class="comment">// 隐含为输出模式</span></span><br><span class="line"><span class="function">ofstream <span class="title">app</span> <span class="params">("file", ofstream::out | ofstream::app)</span></span>;</span><br><span class="line">	<span class="comment">// 显式表示为输出模式</span></span><br><span class="line"></span><br><span class="line"><span class="function">ofstream <span class="title">out</span><span class="params">("file")</span>  </span><br><span class="line">	<span class="comment">// file中的文件会被清空，因为这样隐式声明模式是trunc；</span></span></span><br></pre></td></tr></table></figure></p>
+<h2 id="string流">string流</h2><p>1.stringstrean 特有的操作， 不过这些操作不能对 其他IO类使用。详见c++ prime 5th 中文版的287页。</p>
+<p>2.若一个istringstream对象 record 与一个文本行 data 绑定(drew 973555),这样这个 istringstream 对象 可以使用 ‘&gt;&gt;’ 读取这个文本行中的每个元素。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">People info；</span><br><span class="line">record &gt;&gt; info.name； <span class="comment">// 把drew存入name中</span></span><br><span class="line">record &gt;&gt; info.phone； </span><br><span class="line"><span class="comment">// 把drew后面的数字存在phone中istringstream的这个操作 &gt;&gt; 以空格为分隔符。</span></span><br></pre></td></tr></table></figure>
+<p>3.当我们需要构造输出，在程序最后一起打印的时候，ostringstream是十分有用的。</p>
+<h2 id="顺序容器">顺序容器</h2><p>1.容器在访问和增添方向都有不同性能的差别。详见 c++ prime 5th 中文版的282-293页。</p>
+<p>2.如果不确定使用什么顺序容器的话，那么可以在程序中只使用vector和list，因为这两个顺序容器都能使用迭代器，不使用下标操作，避免随机访问。</p>
+<p>3.古代的编译器可能需要在两个尖括号之间键入空格。<br>例：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;空格&gt;</span><br></pre></td></tr></table></figure></p>
+<p>4.顺序容器在类类型为元素时，如果这个类没有构造函数那么，我们是可以定义一个保存这个类型的对象的容器，不过如果要传递一个值让它初始化的话，那么需要这个类自身有构造函数。</p>
+<p>5.容器库的操作详见 c++ prime 5th 中文版的295页。</p>
+<p>6.容器的定义和初始化详见 c++ prime 5th 中文版的299页。</p>
+<p>7.容器的赋值运算详见 c++ prime 6=5th 中文版的302页。</p>
+<p>8.如果我们要将一个容器初始化为另一个容器的拷贝的时候，两个容器的容器类型和元素类型都必须相同。</p>
+<p>9.使用迭代器拷贝一个容器的子序列的时候，可以用一个迭代器代表容器里面的某一个元素。<br>例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">deque</span>&lt;<span class="built_in">string</span>&gt; authList(authors.begin(), it);</span><br><span class="line"><span class="comment">// 拷贝元素直到(但是不包括) 迭代器it指向的元素。</span></span><br></pre></td></tr></table></figure>
+<p>10.如果容器的元素是内置类型或者是具有默认构造函数的类类型的时候，可以只为构造函数提供一个容器大小的参数，如果没有默认构造函数，那么我们还需要提供一个显式的初始值。</p>
+<p>11.只有顺序容器的构造函数才接受大小参数，关联容器并不支持。</p>
+<p>12.使用array类型，我们需要同时指定元素类型和大小。</p>
+<p>13.如果两个容器原来大小不一致，赋值后两者的大小都与右边容器的大小一致。</p>
+<p>14.array 赋值的时候左右两边运算对象类型要一致，同时array也不允许用花括号包围的值列表进行赋值。</p>
+<p>15.assign成员函数，不能用自身的元素替换自身的元素。</p>
+<p>16.swap 不仅比拷贝速度快，而且还不会导致指向容器的迭代器引用和指针和失效(容器类型为array和 string的情况除外)。</p>
+<p>17.一般的，swap不交换元素，而是交换两个容器的内部的数据结构，不过array不一样，swap会真正交换array中的元素。因此对于array来说，在swap之后指针、引用和迭代器绑定的元素位置不变，但是元素值已经交换了。</p>
+<p>18.向顺序容器添加元素的操作详见 c++ prime 5th 中文版的305页。</p>
+<p>19.向一个vector、string、deque插入元素会使所有指向容器的迭代器、引用和指针失效。</p>
+<p>20.当我们用一个对象初始化或插入一个容器的时候，实际上放入容器中的是对象值的拷贝。</p>
+<p>21.insert 返回第一个新加入元素的迭代器，如果范围为空，不插入任何元素，insert会将第一个参数返回，同时不能将自身元素插入到对象里。</p>
+<p>22.emplace 函数在容器管理的内存中直接构造函数，传递给 emplace 函数的参数必须与元素类型的构造函数相匹配。与<br>emplace_back 不一样的是 push_back 会创建一个局部临时对象，并将其压入容器中。</p>
+<p>23.顺序容器中访问元素的操作，详见 c++ prime 5th 中文版的310页。需要注意的是，这些函数返回的都是引用。</p>
+<p>24.如果我们希望确保下标是合法的，可是使用 at 成员函数，如果下标越界，at 会抛出一个 out_of_range 异常。<br>例：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; svec;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; svec[<span class="number">0</span>];	<span class="comment">// 运行错误</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; svec.at(<span class="number">0</span>);  <span class="comment">// 抛出一个out_of_range</span></span><br></pre></td></tr></table></figure></p>
+<p>25.顺序容器的删除操作详见 c++ prime 5th 中文版的311页。</p>
+<p>26.forward_list 中插入或删除元素的操作详见 c++ prime 5th 中文版的313页。</p>
+<p>27.forward_list 定义了 before_begin 首前迭代器，这个迭代器允许在链表首元素之前添加或删除元素。</p>
+<p>28.顺序容器的大小操作详见 c++ prime 5th 中文版的314页。</p>
+<p>29.array 并不支持 resize。</p>
+<p>30.在我们删除元素之后，尾后迭代器总是失效，当我们每次改变容器操作之后都应该重新定位迭代器。</p>
+<p>31.容器大小的管理操作详见 c++ prime 5th 中文版的318页。</p>
+<p>32.reserve 并不改变容器中元素的数量，它仅影响容器预先分配多大的内存，当需求大小小于或等于当前容量，reserve 什么也不做，容器不会退会内存空间。</p>
+<p>31.容器的size是指已经保存的元素的数目。</p>
+<p>32.capacity 则是在不分配新的内存空间的前提下它最多可以保存多少元素。</p>
+<h2 id="迭代器">迭代器</h2><p>1.迭代器都是通过 * 来实现容器元素操作的。</p>
+<p>2.迭代器的范围是一个 [begin,end),end 指向的位置是容器最后一个元素的后一个位置。</p>
+<p>3.我们可以反复递增begin来达到end，但是 end 不在begin前面。</p>
+<p>4.迭代器有一个c开头的成员用来返回const的迭代器还有一个 r 开头的成员返回反转迭代器。</p>
+<p>5.当不需要写操作的时候，应使用 cbegin 和 cend。</p>
+<p>6.迭代器类型详见 c++ prime 5th 中文版的365页。</p>
+<p>7.插入迭代器的操作与类型详见 c++ prime 5th 中文版的358页。</p>
+<p>8.iostream 迭代器的操作详见 c++ prime 5th 中文版的359页。</p>
+<p>9.反向迭代器的操作详见 c++ prime 5th 中文版的363页。</p>
+<p>10.front_insert 与inserter 的区别在于，front_insert 始终插入容器的第一个元素之前，而 inserter 则是在插入操作完成之后迭代器还会递增指向原来的元素。</p>
+<p>11.iostream 迭代器将它们对应的流当作一个特定类型的元素序列来处理，所以这类迭代器要指定读写对象类型。<br>例1：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">istream_iterator&lt;<span class="keyword">int</span>&gt; int_it(<span class="built_in">cin</span>);  		<span class="comment">// 从 cin 读取 int</span></span><br><span class="line">istream_iterator&lt;<span class="keyword">int</span>&gt; eof;	  				<span class="comment">// 尾后迭代器</span></span><br><span class="line"><span class="function">ifstream <span class="title">in</span><span class="params">("afile")</span></span>;					  	<span class="comment">// 文件流迭代器</span></span><br><span class="line">istream_iterator&lt;<span class="built_in">string</span>&gt; str_it(in);  </span><br><span class="line"><span class="comment">// 从" afile" 读取字符串</span></span><br></pre></td></tr></table></figure></p>
+<p>例2：从标准输入读取数据，存入一个vector<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">istream_iterator&lt;<span class="keyword">int</span>&gt; int_it(<span class="built_in">cin</span>);  		<span class="comment">// 从 cin 读取 int</span></span><br><span class="line">istream_iterator&lt;<span class="keyword">int</span>&gt; eof;	  				<span class="comment">// 尾后迭代器</span></span><br><span class="line"><span class="keyword">while</span> (int_it != eof);</span><br><span class="line">	vec.push_back(*in_iter++);</span><br></pre></td></tr></table></figure></p>
+<p>12.标准库中迭代器的实现保证在我们第一次解引用迭代器之前，从流中读取数据的操作已经完成。</p>
+<p>13.不允许空的或尾后位置的 ostream_iterator。</p>
+<p>14.反向迭代器的目的是表示元素范围，而这些范围是不对称的，是一个左开右闭的区域，因此普通迭代器和反向迭代器指向的区域是相邻的位置，而不是相同的位置。详见 c++ prime 5th 中文版的363页和364页的示意图。</p>
+<h2 id="容器适配器">容器适配器</h2><p>1.所有容器适配器都支持的操作和类型详见 c++ prime 5th 中文版的329和330页。</p>
+<p>2.array 、forward_list 不适用于任何适配器。</p>
+<p>3.vector 不适用于 queue。</p>
+<p>4.list 不适用于priority_queue。</p>
+<p>5.每个容器适配器都基于底层容器类型的操作定义了自己的特殊操作，但是我们只可以使用适配器的操作，而不能使用底层容器的操作。<br>例如：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">intStack.push(ix); <span class="comment">// intStack 保存0 到 9</span></span><br></pre></td></tr></table></figure></p>
+<p>虽然stack 是基于deque实现的，但我们不能直接使用deque操作，意思是不能在stack上调用 push_back 而是调用 stack 自己的 push 操作。</p>
+<p>6.priority_queue允许我们在队列中建立优先级，新加入的元素会排在所有优先级比它低的已有元素之前。意思是可以在队列中创建VIP元素，调整这个元素在队列中的位置。</p>
+<h2 id="泛型算法">泛型算法</h2><p>1.算法依赖元素类型的操作，但是不依赖容器。</p>
+<p>2.算法本身不执行容器的操作。</p>
+<p>3.算法不会改变底层容器的大小。</p>
+<p>4.算法可能改变元素的值，但是不会直接删除或添加元素。</p>
+<p>5.用一个单一迭代器表示第二个序列的算法都假定第二个序列至少与第一个一样长。</p>
+<p>6.算法形式基本模式 alg(beg , end , dest)  // dest -&gt; destination  即 范围 + 目标</p>
+<p>7.只接受单独的 beg2 不接受 end2 的算法假定从 beg2 开始的范围，与 beg 和 end 所表示的范围至少一样大。</p>
+<p>8.一个算法如果提供一个额外目的的增值版本，那么在它的新名字应该是原有的算法加上下划线和目的。</p>
+<p>9.对于 list 和 forward_list 应该优先使用成员函数版本的算法而不是通用算法。详见c++ prime 5th 中文版的369页。</p>
+<p>10.链表特有的操作会改变容器。</p>
+<p>11.链表特有的 splice 算法详见c++ prime 5th 中文版的370页. // 将一个链表剪切到另一个链表</p>
+<h2 id="lambda_表达式">lambda 表达式</h2><p>1.lambda必须使用尾置返回，同时可以忽略参数列表和返回列表，但是必须包含捕获列表和函数体。</p>
+<p>2.如果函数体只是一个return 语句，则返回类型从返回的表达式的类型推断而来，如果函数体包含任何单一 return 语句之外的内容，且未指定返回类型，则返回 void。</p>
+<p>3.捕获列表只能用局部非 static 变量，不过lambda 可以使用局部 static 变量和在它所在函数之外声明的名字。</p>
+<p>4.一个 lambda 捕获的生存期是从 lambda 定义处的代码执行时到 lambda 自身执行的这段时间。</p>
+<p>5.与参数不同，被捕获的变量的值是在 lambda 创建时拷贝，而不是调用时拷贝。</p>
+<p>6.一般来说，我们应该尽量减少捕获的数据量，以及应该避免捕获指针和引用。</p>
+<p>7.当我们混合使用隐式捕获和显示捕获的时候，捕获列表中第一个元素必须是一个 &amp; ( 引用 ) 或 = ( 值 ) ，而且显示捕获的变量必须使用与隐式捕获不同的方式。即，如果隐式捕获是 &amp; ，则显示捕获必须使用值方式。关于 lambda 捕获列表详见 c++ prime 5th中文版的352页。</p>
+<p>8.如果 lambda 捕获列表为空，通常可以用函数来代替它。</p>
+<h2 id="可变_lambda">可变 lambda</h2><p>1.如果我们需要改变一个值捕获的变量，那么可以在参数列表后加上关键字 mutable ，这样以后这样就能改变拷贝后变量的值。</p>
+<h2 id="bind函数">bind函数</h2><p>1.调用 bind 函数的一般形式如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> newCallable = bind (callable , arg_list);</span><br><span class="line"><span class="comment">//newCallable 是新生成的可调用对象，callable 旧调用对象 ， arg_list参数列表。</span></span><br><span class="line"><span class="comment">//每次调用newCallable时，newCallable 会调用 callable 并将arg_list作为参数传递过去。</span></span><br></pre></td></tr></table></figure>
+<p>2.arg_list中使用占位符表示传递给 newCallable 的参数的位置，例：”_1” 是newCallable第一个参数，此外，占位符都在 placeholders 的命名空间里面所以在使用占位符时需要使用 using namesp std::placeholders<br>例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sort(word.begin() , word.end(),isShorter);  <span class="comment">// 按单词长度由短至长排序</span></span><br><span class="line">sort(word.begin() , word.end(),bind(isShorter, _2,_1); <span class="comment">// 按单词长度由长至短排序</span></span><br><span class="line"><span class="comment">//传入同样的参数，实现相反的功能。</span></span><br></pre></td></tr></table></figure>
+<p>3.bind 不能直接用代替对 ostream 的捕获，因为 bind 要拷贝参数，但是 ostream 不能被拷贝，如果传递 ostream 对象，但是又不能拷贝那么就要使用 ref 函数。如果要传递一个常量，但是又不能拷贝，那么使用 cref 函数。</p>
+<h2 id="关联容器">关联容器</h2><p>1.标准库中的8个关联容器从三个方面划分：</p>
+<ul>
+<li>①每个都是基于一个 map 或者一个 set，</li>
+<li>②有无重复的关键字以 multi 区分，</li>
+<li>③关键字之间有无顺序以 unordered 区分</li>
+</ul>
+<p>2.类型 map 和 multimap 定义在头文件 map 中，set 和 multimap 定义在头文件 set 中，无序容器则定义在头文件 unordered_map 和 unorder_set中。详见 c++ prime 5th中文版的374页。</p>
+<p>3.从 map 提取一个元素中，会得到一个 pair 类型的对象，pair 类型的对象有两个 public 的成员，一个是 first 存储关键字，另一个是 second 存储值。关于 pair 的操作详见 c++ prime 5th中文版的380页。</p>
+<p>4.当初始化一个 map 时 ， 必须提供关键字类型和值类型。我们将每个关键字 - 值对包围在花括号中。<br>例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">map</span>&lt;<span class="built_in">string</span>,<span class="built_in">string</span>&gt; authors = &#123;&#123;<span class="string">"Joyce"</span> , <span class="string">"James"</span>&#125; , &#123;<span class="string">"Austen"</span> , <span class="string">"Jane"</span>&#125;&#125;;</span><br></pre></td></tr></table></figure>
+<p>5.自定义类类类型的有序容器关键字类型的要求详见 c++ prime 5th中文版的378页。</p>
+<p>6.创建pair对象<br>        例：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pair&lt;<span class="built_in">string</span>,<span class="keyword">int</span>&gt;foo ( <span class="string">"John"</span> , <span class="number">16</span>);</span><br><span class="line"><span class="keyword">auto</span> foo = make_pair(<span class="string">"John"</span> , <span class="number">16</span>);</span><br></pre></td></tr></table></figure></p>
+<p>7.关联容器额外的类型别名详见 c++ prime 5th中文版的381页。</p>
+<p>8.map 的 value_type 是一个 pair 的，同时 pair 的关键字部分是 const 的 ，因此不能改变元素的关键字。不过可以改变 pair 的值( second 成员)。</p>
+<p>9.虽然 set 类型同时定义了 iterator 和 const_iterator，但这两种类型都只允许只读访问 set 中的元素。</p>
+<p>10.我们通常不对关联容器使用泛型算法，但是如果真的要使用，要么将它当作一个源序列，要么当作一个目的位置。</p>
+<p>11.在无序容器中插入一个容器已存在的元素，那么这个元素并不会对容器产生影响。</p>
+<p>12.关联容器的 insert 操作详见 c++ prime 5th中文版的384页。</p>
+<p>13.添加单一元素的 insert 和 emplace 版本返回一个 pair ， first 成员是一个指向给定关键字的元素的 pair 的迭代器，second 成员则是一个 bool 值，指出元素是否插入成功。</p>
+<p>14.对于允许重复关键字的容器，接受单个元素的 insert 操作返回一个指向新元素的迭代器，并无序返回一个 bool 值。</p>
+<p>15.关联容器的删除操作详见 c++ prime 5th中文版的386页。</p>
+<p>16.set 类型不支持下标操作。</p>
+<p>17.我们不能对一个 multimap 或一个 unordere_multimap 进行下标操作，因为一个关键字可能与多个值对应。</p>
+<p>18.如果我们使用一个不在容器中的关键字作为下标，会添加一个具有此关键字的元素到 map 中。所以当我们不想在元素不存在的情况下添加元素，那么这种情况下不能使用下标操作。</p>
+<p>19.当对一个 map 进行下标操作时，会获得一个 mapped_type 对象，但当解引用一个 map 迭代器时，会得到一个 value_type 对象。</p>
+<p>20.关联容器的查找操作详见 c++ prime 5th中文版的388页。</p>
+<p>21.如果一个 multimap 或 multiset 中有多个元素与一个关键字相关联，那么这些元素在容器中会相邻存储。</p>
+<p>22.当我们遍历一个 multimap 或 multiset 时，保证可以得到序列中所有具有给定关键字的元素。</p>
+<p>23.如果关键字在容器中，lower_bound 返回的迭代器将指向第一个具有给定关键字的元素，而 upper_bound 返回的迭代器则指向最后一个指向给定关键字的元素之后的位置，对同一个关键字同时调用这两个成员函数可以表示该关键字的元素范围。<br>例:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ser&lt;<span class="keyword">int</span>&gt; foo  = &#123;<span class="number">1</span> , <span class="number">2</span> , <span class="number">3</span> , <span class="number">4</span> , <span class="number">4</span> , <span class="number">4</span> , <span class="number">4</span> , <span class="number">4</span> , <span class="number">5</span> , <span class="number">6</span> , <span class="number">7</span>&#125;;</span><br><span class="line">                           |                    |</span><br><span class="line">	               	lower_bound             upper_bound</span><br></pre></td></tr></table></figure>
+<p>24.如果 lower_bound 和 upper_bound 返回相同的迭代器，则给定关键字不在容器中。</p>
+<p>25.equal_range 接受一个关键字，返回一个 pair ，如果匹配成功 first 成员保存的迭代器与 lower_bound 返回的一样，second 成员保存的迭代器与 upper_bound 返回的一样，如果匹配失败则两个迭代器指向关键字可以插入的位置。</p>
+<p>26.如果关键字类型固有就是无序的，或者性能测试发现可以用哈希技术解决，就可以使用无序容器。</p>
+<p>27.无序容器在存储上组织为一组桶，每个桶保存另个或多个元素。无序容器使用一个哈希函数将元素映射到桶。</p>
+<p>28.无序容器管理操作详见 c++ prime 5th中文版的395页。</p>
+<p>29.自定义类类类型的无序容器关键字类型的要求详见 c++ prime 5th 中文版的396页。</p>
+<h2 id="动态内存">动态内存</h2><p>1.静态内存用来保存局部 static 对象、类 static 数据成员以及定义在任何函数之外的变量。栈内存用来保存定义在函数内的非 static 对象。</p>
+<p>2.分配在静态或栈内存中的对象由编译器自动创建和销毁，但是对于栈对象仅在其定义的程序块运行时才存在，static 对象在使用之前分配，在程序结束时销毁。</p>
+<p>3.程序用堆来存储动态分配的对象，并且控制这些对象的生存期。</p>
+<p>4.智能指针的三种类型都定义在 memory 头文件中。</p>
+<p>5.智能指针也是模板，因此在创建的时候必须提供指针可以指向的类型。<br>如： </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">shared_ptr</span>&lt;<span class="built_in">string</span>&gt; p1；</span><br></pre></td></tr></table></figure>
+<p>6.关于 shared_ptr 和 unique_ptr 都支持的操作详见  c++ prime 5th 中文版的 401页。</p>
+<p>7.关于 shared_ptr 独有的操作详见 c++ prime 5th 中文版的 401页。</p>
+<p>8.我们可以使用 make_shared 来初始化一个 shared_ptr 对象。<br>例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; p3 = make_shared&lt;<span class="keyword">int</span>&gt;(<span class="number">42</span>);</span><br><span class="line"><span class="built_in">shared_ptr</span>&lt;<span class="built_in">string</span>&gt; p2 = make_shared&lt;<span class="built_in">string</span>&gt;(<span class="number">10</span>,<span class="string">'9'</span>);</span><br><span class="line"><span class="comment">// 值得一提的是 make_shared 函数是最安全的分配动态内存的方法，定义在memory头文件中</span></span><br></pre></td></tr></table></figure>
+<p>9.每一个 shared_ptr 都有一个关联的引用计数器，每当我们拷贝一个 shared_ptr 作为参数传递给一个函数，或者作为函数值返回的时候它就会递增，当我们赋一个新值或者销毁 shared_ptr对象的时候就会递减。如果计算器递减至零的时候，那么 shared_ptr 就会通过析构函数释放它占用的内存。</p>
+<p>下面，我们来看几个在函数中用 shared_ptr 处理局部变量的例子。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">shared_ptr</span>&lt;Foo&gt; bar (T arg)</span><br><span class="line">&#123;  	<span class="comment">// 对 arg 进行一系列处理</span></span><br><span class="line">    <span class="keyword">return</span> make_shared&lt;Foo&gt; (arg)；</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 将局部变量保存下来由 shared_ptr 负责释放</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">use_bar</span> <span class="params">(T arg)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="built_in">shared_ptr</span>&lt;Foo&gt; p = bar(arg);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// p离开了作用域，当函数结束的时候，shared_ptr 引用计数器递减至零，p被销毁。</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">use_bar</span><span class="params">(T arg)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="built_in">shared_ptr</span>&lt;Foo&gt; p = bar(arg);</span><br><span class="line">	<span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 把 shared_ptr 作为函数值返回，shared_ptr 引用计数器加1，</span></span><br><span class="line"><span class="comment">//虽然 p 离开了作用域，但是不会被销毁。</span></span><br></pre></td></tr></table></figure>
+<p>10.如果我们将 shared_ptr 存放在一个容器中，而后不再需要全部元素，只是使用其中一部分，<br>        那么我们一定要用 erase 删除不再使用的那个元素。</p>
+<p>11.程序在不知道自己需要使用多少个对象、所需对象的准确的类型、以及需要在多个对象之间共享数据时则需要使用动态内存。    </p>
+<p>12.运算符 new 在自由空间分配一个无名的对象并返回指向该对象的指针。<br>关于 new 和 malloc 的区别请看：</p>
+<p>13.只有当括号中仅有单一初始化器时才可以用 auto 。</p>
+<p>14.对于一个定义了默认构造函数的类类型，其 const 动态对象可以隐式初始化，而其他类型的对象就必须显示初始化。</p>
+<p>15.默认情况下，如果 new 不能分配所要求的内存空间，它会抛出一个类型为 bad_alloc 的异常。</p>
+<p>16.定位 new 表达式允许我们向 new 传递额外的参数<br>例：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *p1 = <span class="keyword">new</span> <span class="keyword">int</span>; <span class="comment">// 如果分配失败，new 抛出 std::bad_alloc	</span></span><br><span class="line"><span class="keyword">int</span> *p2 = <span class="keyword">new</span> (nothrow) <span class="keyword">int</span>; <span class="comment">// 如果分配失败，new 返回一个空指针</span></span><br><span class="line"><span class="comment">//将 nothrow 传递给 new 的意思就是让 new 不抛出异常，分配失败则返回一个空指针。</span></span><br><span class="line"><span class="comment">//bad_alloc 和 nothrow 定义在头文件 new 中。</span></span><br></pre></td></tr></table></figure></p>
+<p>17.传递给 delete 的指针必须指向一个动态分配的内存，或者是一个空指针，拷贝的不可以。</p>
+<p>18.空悬指针指的是指向一块曾经保存数据但是现在已经无效的内存的指针。</p>
+<p>19.虽然 const 对象的值不能被改变，但它本身是可以被销毁的。但是不能把一个局部变量或者空悬指针传给 delete 。</p>
+<p>20.普通指针在离开其作用域时，它所指向的对象什么也不会发生。如果这个指针指向的是动态内存，那么内存不会被自动释放，除非它被显示释放。</p>
+<p>21.使用 new 和 delete 管理动态内存的三个常见问题：</p>
+<ul>
+<li>1.忘记 delete 内存</li>
+<li>2.使用已经释放的对象。</li>
+<li>3.同一块内存连续释放两次。</li>
+</ul>
+<p>22.如果我们有两个普通指针指向同一个对象，那么其中一个被 delete 之后，另一个要赋予 nullptr。</p>
+<p>23.接受指针参数的智能指针的构造函数是 explicit 的，同时我们不能进行普通指针与智能指针间的隐式转换，所以必须使用直接初始化形式。<br>例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; p1 = <span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">1024</span>) ; </span><br><span class="line"><span class="comment">// 错误 不能使用赋值初始化，因为不能进行隐式转换。</span></span><br><span class="line"><span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; p1(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">1024</span>));  </span><br><span class="line"><span class="comment">// 正确 使用直接初始化</span></span><br></pre></td></tr></table></figure>
+<p>24.自定义其他类型的 shared_ptr 和改变 shared_ptr 的其他方法详见 c++ prime 5th中文版的 412 页。</p>
+<p>25.shared_ptr可以协调对象的析构，但这仅限于自身的拷贝，所以应该使用 make_shared 初始化一个 shared_ptr，而不是 new。</p>
+<p>26.当将一个普通指针托管给 shared_ptr 之后，就不应该再使用内置指针来访问这个普通指针指向的内存。</p>
+<p>27当我们需要向不能使用智能指针的代码传递一个内置指针的时候，我们可以使用 get 函数。get 函数它返回一个内置指针指向智能指针管理的对象，但是我们不能 delete 这个指针。因为 get 只用来将指针的<strong>访问</strong>权限传递给代码，所以永远不可以用 get 初始化另一个智能指针或给另一个智能指针赋值。</p>
+<p>28.reset 函数可以将一个新的指针赋予一个 shared_ptr （断开共享）。reset 会更新引用计数，如果有需要会释放 p 指向的对象。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!p.unique())</span><br><span class="line">	p.reset(<span class="keyword">new</span> <span class="built_in">string</span>(*p));</span><br><span class="line">*p += newVal;</span><br></pre></td></tr></table></figure>
+<p>29.在程序块过早结束的时候(正常处理结束或者发生异常)，智能指针能确保安全的释放对象，但是内置指针就不行。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="built_in">shared_ptr</span>&lt;<span class="keyword">int</span>&gt; sp(<span class="keyword">new</span> <span class="keyword">int</span> (<span class="number">42</span>));  <span class="comment">//分配一个新对象</span></span><br><span class="line"><span class="comment">//这段代码抛出一个异常，且在 f 中未被捕获</span></span><br><span class="line"><span class="comment">//在函数结束时 shared_ptr 检查引用计数，</span></span><br><span class="line"><span class="comment">//在此类中 sp 是这块内存的唯一指针，所以结束时会自动释放内存。</span></span><br><span class="line">&#125;</span><br><span class="line">	</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f1</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> *ip = <span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">42</span>); <span class="comment">// 分配一个新对象</span></span><br><span class="line"><span class="comment">// 这段代码抛出一个异常，且在 f 中未被捕获</span></span><br><span class="line">	<span class="keyword">delete</span> ip; </span><br><span class="line"><span class="comment">// 如果在new 之后，delete 之前发生了异常且未被捕获，</span></span><br><span class="line"><span class="comment">//同时在 f1 之外就没有指针指向这块内存，所以无法释放它</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>30.智能指针的使用规范：</p>
+<ul>
+<li>1.不使用相同的内置指针值初始化（或 reset）多个智能指针。</li>
+<li>2.不 delete get() 返回的指针。</li>
+<li>3.不使用 get() 初始化或 reset 另一个智能指针。</li>
+<li>4.如果我们使用了 get() 返回的指针，记住当最后一个对应的智能指针销毁后，我们的指针就无效了。</li>
+<li>5.如果我们使用智能指针管理的资源不是 new 分配的内存，记得要传递给它一个删除器。</li>
+</ul>
+<p>31.当我们定义一个 unique_ptr 时，需要将其绑定到一个 new 返回的指针并且必须采用直接初始化形式。<br>值得注意的是：在某个时刻只能有一个 unique_ptr 指向给定对象，所以 unique_ptr 不支持普通拷贝和赋值操作。<br>例:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">unique_ptr&lt;<span class="built_in">string</span>&gt; p1(<span class="keyword">new</span> <span class="built_in">string</span>(<span class="string">"Stegosaurus"</span>));</span><br><span class="line">unique_ptr&lt;<span class="built_in">string</span>&gt; p1(p2);		<span class="comment">// 错误： unique_ptr 不支持拷贝</span></span><br><span class="line">unique_ptr&lt;<span class="built_in">string</span>&gt; p3;</span><br><span class="line">p2 = p3；	<span class="comment">//错误： unique_ptr 不支持赋值</span></span><br></pre></td></tr></table></figure>
+<p>32.关于 unique_ptr 操作详见 c++ prime 5th中文版的 418 页。</p>
+<p>33.虽然不能拷贝 unique_ptr ，但是我们通过从函数里面返回一个 unique_ptr。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">unique_ptr&lt;<span class="keyword">int</span>&gt; clone(<span class="keyword">int</span> p)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> unique_ptr&lt;<span class="keyword">int</span>&gt; <span class="keyword">new</span>(<span class="keyword">int</span> (p));</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 还可以返回一个局部对象的拷贝</span></span><br><span class="line">unique_ptr&lt;<span class="keyword">int</span>&gt; clone(<span class="keyword">int</span> p)</span><br><span class="line">&#123;</span><br><span class="line">	unique_ptr&lt;<span class="keyword">int</span>&gt; ret(<span class="keyword">new</span> <span class="keyword">int</span> (p));</span><br><span class="line">	<span class="comment">// 其他操作</span></span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>34.关于 auto_ptr 详见 c++ prime 5th中文版的 419 页。</p>
+<p>35.向 unique_ptr 传递删除器详见 c++ prime 5th中文版的 419 页。</p>
+<p>36.weak_ptr 是一种不控制所指向对象生存期的智能指针，指向一个 shared_ptr 管理的对象，不过 weak_ptr 绑定之后，不会改变 shared_ptr 的引用计数，一旦最后一个 shared_ptr被释放，那么即使 weak_ptr 指向对象，对象还是会被释放，所以我们不能用 weak_ptr 直接访问对象，应该先调用 lock 函数检查对象是否存在，如果存在则返回一个指向共享对象的 shared_ptr。</p>
+<p>37.关于 weak_ptr 的操作详见 c++ prime 5th中文版的 420 页。</p>
+<p>38.当一个应用需要可变数量的对象时，最好使用 vector 这类标准库容器，因为不仅性能好，而且不容易出现内存管理错误。</p>
+<p>39.在用 new 初始化动态数组时，如果初始化数目小于元素数目，剩余元素将进行值初始化，如果初始化器数目大于元素数目，则 new 表达式失败，不会分配任何内存，并且抛出一个 bad_array_new_length 异常。</p>
+<p>40.虽然我们不能创建一个大小为 0 的静态数组对象，当时调用 new[n] 是合法的，即可以分配一个空数组。<br>例：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> arr[<span class="number">0</span>]； <span class="comment">// 错误：不能定义长度为0的数组</span></span><br><span class="line"><span class="keyword">char</span> *cp = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">0</span>]； <span class="comment">// 正确，但是 cp 不能解引用</span></span><br></pre></td></tr></table></figure></p>
+<p>41.为了释放动态数组，我们使用一种特殊的 delete。<br>例：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">delete</span> [] <span class="keyword">cp</span>; // <span class="keyword">cp</span> 必须指向一个动态分配的数组或为空</span><br></pre></td></tr></table></figure></p>
+<p>42.如果我们在 delete 一个数组指针时忘记了方括号，或者在 delete 一个单一对象的指针时使用了方括号，<br>编译器不会给出警告。</p>
+<p>43.标准库提供了一个可以管理 new 分配的数组的 unique_ptr 。关于指向数组的 unique_ptr 操作 详见 c++ prime 5th中文版的 426 页。</p>
+<p>44.标准库 allocator 类定义在头文件 memory 中，它帮助我们将内存分配和对象构造分离开来，它提供一种类型感知的内存分配方法，它分配的内存是原始的、未构造的。<br>例：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">allocator&lt;<span class="built_in">string</span>&gt; alloc;	</span><br><span class="line"><span class="comment">// 可以分配 string 的 allocator 对象</span></span><br><span class="line"><span class="keyword">auto</span> <span class="keyword">const</span> p = alloc.allocate(n); </span><br><span class="line"><span class="comment">// 分配 n 个未初始化的 string</span></span><br></pre></td></tr></table></figure></p>
+<p>45.关于 allocator 的操作详见 c++ prime 5th中文版的 428 页。</p>
+<p>46.我们只能对构造后的 allocate 对象进行 destroy 操作，最后通过调用 deallocate 释放内存。</p>
+<p>47.关于 allocator 填充未初始化内存和拷贝的算法详见 c++ prime 5th中文版的 429 页。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/c/" rel="tag">#c++</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/08/31/keywords-in-cpp/" rel="next" title="keywords in cpp(part one)">
+                <i class="fa fa-chevron-left"></i> keywords in cpp(part one)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/15/cpp-prime-chap-13-16/" rel="prev" title="Note in c++ prime 5th (chap13-16)">
+                Note in c++ prime 5th (chap13-16) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/07/24/cpp-prime-chap-8-12/"
+           data-title="Note in c++ prime 5th (chap8-12)" data-url="https://luengzeegin.github.io/2016/07/24/cpp-prime-chap-8-12/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/11225229?v=3&u=b3c447bfe8d0842bfc56483c05540fe69ebed1f6&s=140"
+               alt="Lueng Zeegin" />
+          <p class="site-author-name" itemprop="name">Lueng Zeegin</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/luengzeegin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/liang-zi-jian-48" target="_blank" title="ZhiHu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  ZhiHu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#IO类"><span class="nav-number">1.</span> <span class="nav-text">IO类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出缓冲"><span class="nav-number">2.</span> <span class="nav-text">输出缓冲</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件流对象"><span class="nav-number">3.</span> <span class="nav-text">文件流对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件模式"><span class="nav-number">4.</span> <span class="nav-text">文件模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#string流"><span class="nav-number">5.</span> <span class="nav-text">string流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#顺序容器"><span class="nav-number">6.</span> <span class="nav-text">顺序容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迭代器"><span class="nav-number">7.</span> <span class="nav-text">迭代器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#容器适配器"><span class="nav-number">8.</span> <span class="nav-text">容器适配器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#泛型算法"><span class="nav-number">9.</span> <span class="nav-text">泛型算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lambda_表达式"><span class="nav-number">10.</span> <span class="nav-text">lambda 表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可变_lambda"><span class="nav-number">11.</span> <span class="nav-text">可变 lambda</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bind函数"><span class="nav-number">12.</span> <span class="nav-text">bind函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关联容器"><span class="nav-number">13.</span> <span class="nav-text">关联容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态内存"><span class="nav-number">14.</span> <span class="nav-text">动态内存</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lueng Zeegin</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"luengzeegin"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

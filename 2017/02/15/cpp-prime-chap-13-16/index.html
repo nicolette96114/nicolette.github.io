@@ -1,0 +1,1040 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="c++," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="备忘录" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="有时候，我在写代码的时候忘记了一些概念，就会回头看看我之前写的东西。但是我发现有些概念好像还是很模糊，而且也有点偏颇，不是十分完整，如果您看到还理解的话，建议您去 MSDN 找相应的文档看看。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Note in c++ prime 5th (chap13-16)">
+<meta property="og:url" content="https://luengzeegin.github.io/2017/02/15/cpp-prime-chap-13-16/index.html">
+<meta property="og:site_name" content="备忘录">
+<meta property="og:description" content="有时候，我在写代码的时候忘记了一些概念，就会回头看看我之前写的东西。但是我发现有些概念好像还是很模糊，而且也有点偏颇，不是十分完整，如果您看到还理解的话，建议您去 MSDN 找相应的文档看看。">
+<meta property="og:updated_time" content="2017-02-28T08:27:40.180Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Note in c++ prime 5th (chap13-16)">
+<meta name="twitter:description" content="有时候，我在写代码的时候忘记了一些概念，就会回头看看我之前写的东西。但是我发现有些概念好像还是很模糊，而且也有点偏颇，不是十分完整，如果您看到还理解的话，建议您去 MSDN 找相应的文档看看。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://luengzeegin.github.io/2017/02/15/cpp-prime-chap-13-16/"/>
+
+  <title> Note in c++ prime 5th (chap13-16) | 备忘录 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">备忘录</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">苟利国家生死以，岂因祸福避趋之。</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '5KNqcS_qiVtdSPs-g3YH','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Note in c++ prime 5th (chap13-16)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-15T22:39:26+08:00" content="2017-02-15">
+              2017-02-15
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/02/15/cpp-prime-chap-13-16/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/15/cpp-prime-chap-13-16/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>有时候，我在写代码的时候忘记了一些概念，就会回头看看我之前写的东西。但是我发现有些概念好像还是很模糊，而且也有点偏颇，不是十分完整，如果您看到还理解的话，建议您去 MSDN 找相应的文档看看。<br><a id="more"></a></p>
+<h2 id="拷贝控制">拷贝控制</h2><p>1.拷贝控制操作是指：拷贝构造函数、拷贝赋值函数、移动构造函数、移动赋值运算符、析构函数。</p>
+<p>2.如果一个构造函数的第一个参数是自身类类型的引用，且任何额外参数都有默认值，则此构造函数是拷贝构造函数。</p>
+<p>3.拷贝初始化不仅在我们用 <strong>=</strong> 定义变量时会发生，在下列情况下也会发生 ：</p>
+<ul>
+<li>将一个对象作为实参传递给一个非引用类型的形参</li>
+<li>从一个返回类型为非引用类型的函数返回一个对象</li>
+<li>用花括号列表初始化一个数组中的元素或一个聚合类中的成员</li>
+</ul>
+<p>4.拷贝构造函数第一个参数必须是引用类型。如果其参数不是引用类型，则调用永远也不会成功，因为为了调用拷贝构造函数，我们必须拷贝它的实参，但是为了拷贝实参，我们又需要调用拷贝构造函数，如此循环。</p>
+<p>5.如果我们使用的初始化值要求通过一个 explicit 的构造函数来进行类型转换，那么使用拷贝初始化还是直接初始化就不是无关紧要的了。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v1(<span class="number">10</span>) ; <span class="comment">// 正确：直接初始化</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v2 = <span class="number">10</span>; <span class="comment">// 错误：接受大小参数的构造函数时 explicit 的</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;)</span> </span>; <span class="comment">// f的参数进行拷贝初始化</span></span><br><span class="line">f(<span class="number">10</span>) ; <span class="comment">// 错误：不能用一个 explicit 的构造函数拷贝一个实参</span></span><br><span class="line">f(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; (<span class="number">10</span>)); <span class="comment">// 正确：从一个 int 直接构造一个临时的 vector</span></span><br></pre></td></tr></table></figure></p>
+<p>6.在拷贝初始化过程中，编译器可以(但不是必须)跳过拷贝/移动构造函数，直接创建对象。但是，即使编译器略过了拷贝/构造函数，但在这个程序点上，拷贝/移动构造函数必须时存在且可访问的，例如，不能使 private 的。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> null_book = <span class="string">"9-999-9999"</span>; </span><br><span class="line"><span class="comment">// 拷贝初始化</span></span><br></pre></td></tr></table></figure></p>
+<p>改写为</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">null_book</span><span class="params">("9-999-9999")</span></span>; </span><br><span class="line"><span class="comment">// 编译器略过了拷贝构造函数</span></span><br></pre></td></tr></table></figure>
+<p>7.为了与内置类型的赋值保持一致，赋值运算符通常应该返回一个指向其左侧运算对象的引用。</p>
+<p>8.如果一个类未定义自己的拷贝赋值运算符，编译器会为它生成一个合成拷贝赋值运算符。对于某些类来说，合成拷贝赋值运算符用来禁止该类型对象的赋值。详见 c++ prime 5th 中文版的450页。</p>
+<p>9.析构函数执行与构造函数相反的操作：构造函数初始化的非 static 数据成员，还可能做一些其他工作：析构函数释放对象使用的资源，并销毁对象的非 static 数据成员。</p>
+<p>10.析构函数是类的一个成员函数，名字由波浪号接类名构成。他没有返回值，也不接受参数。析构函数不能重载，因此对于一个给定类，只会有唯一一个析构函数。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Foo</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        ~Foo();</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">&#125;；</span><br></pre></td></tr></table></figure></p>
+<p>11.在一个构造函数中，成员的初始化是在函数体执行之前完成的，并且按照它们在类中出现的顺序进行初始化。</p>
+<p>12.在一个析构函数中，首先执行函数体，然后按照成员初始化顺序的逆序，将对象在生存期分配的所有资源销毁。</p>
+<p>13.内置类型没有析构函数，因此销毁内置类型成员什么也不需要做。当我们隐式销毁一个内置指针类型的成员不会 delete 它所指向的对象。</p>
+<p>14.无论何时一个对象被销毁，就会自动调用其析构函数：</p>
+<ul>
+<li>变量在离开其作用时被销毁。</li>
+<li>当一个对象被销毁时，其成员被销毁。</li>
+<li>容器(无论是标准库容器还是数组)被销毁时，其元素被销毁。</li>
+<li>对于动态分配的对象，当对指向它的指针应用 delete 运算符时被销毁。</li>
+<li>对于临时对象，当创建它的完整表达式结束时被销毁。</li>
+</ul>
+<p>15.当指向一个对象的引用或者指针离开作用于的时候，析构函数不会执行。</p>
+<p>16.对于某些类，合成析构函数被用来阻止该类型的对象被销毁，如果不是这种情况，合成析构函数的函数体就为空。</p>
+<p>17.成员是在析构函数体之后隐含的析构阶段中被销毁的。在整个对象销毁过程中，析构函数体是作为成员销毁步骤之外的另一部分进行的。</p>
+<p>18.三个基本操作可以控制类的拷贝操作：拷贝构造函数、拷贝赋值运算符和析构函数。</p>
+<p>19.如果一个类需要(自定义)一个析构函数，我们<strong>几乎可以</strong>肯定它特需要(自定义)一个拷贝构造函数和(自定义)一个拷贝赋值运算符。</p>
+<pre><code><span class="attribute">     析  构
+   /        \
+赋值 =====</span>=<span class="string"> 拷贝</span>
+</code></pre><p>20.如果一个类需要一个拷贝构造函数，<strong>几乎可以</strong>肯定它也需要一个拷贝赋值运算符，反之亦然。无论是需要拷贝构造函数还是需要拷贝赋值运算符都不必意味着也需要析构函数。</p>
+<p>21.我们可以通过将拷贝控制成员定义为 =default 来显示地要求编译器生成合成的版本。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Sales_data</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    Sales_data() = <span class="keyword">default</span>;</span><br><span class="line">    Sales_data(<span class="keyword">const</span> Sales_data&amp;) = <span class="keyword">default</span>;</span><br><span class="line">    Sales_data&amp; <span class="keyword">operator</span>= (<span class="keyword">const</span> Sales_data&amp;) = <span class="keyword">default</span>;</span><br><span class="line">    ~Sales_data() = <span class="keyword">default</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>22.大多数类应该定义默认构造函数、拷贝构造函数和拷贝赋值函数，无论是显式还是隐式。</p>
+<p>23.删除的函数是一种我们虽然声明了它们，但不能以任何方式使用它们的函数。我们可以在函数参数列表后面加上 =delete 来说明该函数是删除的。</p>
+<p>24.=delete 与 =default 的不同是 =delete 必须出现在函数第一次声明的时候使得编译器在第一个函数时删除的，以便禁止试图使用它的操作。而 =default 直到编译器生成代码时才需要。<br>在另一方面，我们可以对任何函数指定 =delete(我们只能对编译器可以合成的默认构造函数或者拷贝构造函数成员使用 =default)，虽然删除函数的主要用途时禁止拷贝控制成员，但是当我们希望引导函数匹配过程时，删除函数有时候也是有用的。</p>
+<p>25.析构函数不能是删除的成员，对于析构函数已删除的类型，不能定义该类型的变量或者释放指向该类型动态分配对象的指针。</p>
+<p>26.本质上，当不可能拷贝、赋值或销毁类的成员时，类的合成拷贝控制成员就被定义为删除的。详见 c++ prime 5th 中文版 p450。</p>
+<p>27.希望阻止拷贝的类应该使用 =delete 来定义它们自己的拷贝构造函数和拷贝赋值运算符，而不应该将它们声明为 private。</p>
+<p>28.一个类的行为是像一个值还是像一个指针，却决于我们如何确定此类型对象的拷贝语义。</p>
+<p>29.类的行为像一个值，意味着它应该也有自己的状态。当我们拷贝一个像值的对象时，副本和元对象是完全独立的。改变副本不会对原对象产生影响，反之亦然。</p>
+<p>30.类的行为像指针，意味着它是共享的。当我们拷贝一个这种类的对象时，副本和原对象使用相同的底层数据，改变副本数据会应该原对象，反之亦然。</p>
+<p>31.io类型 和 unique_ptr 不允许拷贝或赋值，因此它们的行为既不像值也不像指针。</p>
+<p>32.要使一个类的行为像值，对于类管理的每个资源，每个对象都应该拥有一份自己的拷贝(即需要定义拷贝函数)。</p>
+<p>33.当我们在编写赋值运算符时，我们需要注意：</p>
+<ul>
+<li>如果将一个对象赋予它本身时，赋值运算符必须能正确工作。</li>
+<li>大多数赋值运算符组合了析构函数和拷贝函数的工作。</li>
+</ul>
+<p>34.一个好的赋值运算符应该是先将右侧运算对象拷贝到一个局部临时对象中，在拷贝完成之后，销毁左侧运算对象的现有成员就是安全的了，一旦左侧运算对象的资源被销毁，就只剩下将数据从临时对象拷贝到左侧运算对象的成员中了。</p>
+<p>35.要使一个类的行为像指针，最好的方法就是使用 shared_ptr来管理类中的资源。当我们想要直接管理资源的时候，我们可以使用引用计数。</p>
+<p>36.关于引用计数的工作方式，详见 c++ prime 5th 中文版的 p455。</p>
+<p>37.为了交换两个对象，我们需要进行一次拷贝和两次赋值。</p>
+<p>38.与拷贝控制成员不同，swap 并不是必要的。但是，对于分配了资源的类，定义 swap 可能是一种重要的优化手段。</p>
+<p>39.使用拷贝和交换的赋值运算符自动就是异常安全的，且能正确处理自赋值。因为在改变左侧运算对象之前，拷贝右侧运算对象保证了自赋值的正确。</p>
+<p>40.公共的工作应该放在 private 的工具函数中完成。</p>
+<p>41.某些类需要在运行时分配可变大小的内存空间，可以使用标准库容器来保存它们的数据。</p>
+<p>42.标准库容器、string 和 shared_ptr 类既支持移动也支持拷贝。IO 类和 unique_ptr 类可以移动但不能拷贝。</p>
+<p>43.右值引用就是必须绑定到右值的引用，我们可以通过 &amp;&amp; 来获得右值引用。</p>
+<p>44.右值引用有一个重要的性质 —- 只能绑定到一个将要销毁的对象。</p>
+<p>45.一般而言，一个左值表达式表达的是一个对象的身份(地址)，而一个右值表达式表示的是对象的值。</p>
+<p>46.我们不能将左值引用绑定到要求转换的表达式、字面常量、返回右值的表达式。</p>
+<p>47.我们可以将一个右值引用绑定到要求转换的表达式、字面常量、返回右值的表达式，但是不能将一个右值引用直接绑定到一个左值上。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i =<span class="number">42</span>;             </span><br><span class="line"><span class="keyword">int</span> &amp;r = i;             </span><br><span class="line"><span class="comment">//正确： r 引用 i</span></span><br><span class="line"><span class="keyword">int</span> &amp;&amp;rr = i;           </span><br><span class="line"><span class="comment">//错误： 不能将一个右值引用绑定到一个左值上</span></span><br><span class="line"><span class="keyword">int</span> &amp;r2 = i * <span class="number">42</span>;       </span><br><span class="line"><span class="comment">//错误： i * 42 是一个右值</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> &amp;r3 = i * <span class="number">42</span>; </span><br><span class="line"><span class="comment">//正确：我们可以将一个 const 的引用绑定到一个右值上</span></span><br><span class="line"><span class="keyword">int</span> &amp;&amp;rr2 = i * <span class="number">42</span>;     </span><br><span class="line"><span class="comment">//正确</span></span><br></pre></td></tr></table></figure></p>
+<p>48.返回左值引用的函数，连同赋值、下标、解引用和前置递增/递减运算符，都是返回左值的表达式。</p>
+<p>49.返回非引用类型的函数，连同算术、关系、位以及后置递增/递减运算符，都生成右值。虽然我们不能将一个左值引用绑定到这类表达式上，但是我们可以将一个 const 的左值引用或者一个右值引用绑定到这类表达式上。</p>
+<p>50.左值和右值的区别在于：左值有持久的状态，而右值要么是字面常量，要么是在表达式求职过程中创建的临时变量。</p>
+<p>51.右值引用指向的对象是将被销毁的，并且这个对象没有其他用户。这意味着使用右值引用的代码可以自由地接管所引用的对象的资源。</p>
+<p>52.变量或变量表达式都是左值的，因此我们不能将一个右值引用直接绑定到一个变量上，即使这个变量是右值引用类型也不行。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> &amp;&amp;rr1 = <span class="number">42</span>;</span><br><span class="line"><span class="keyword">int</span> &amp;&amp;rr2 = rr1;</span><br></pre></td></tr></table></figure></p>
+<p>53.我们可以通过调用 move 函数来获得绑定到左值上的右值引用，但是这就意味着移后原对象可以被销毁、赋值，但是不能使用这个对象的值。</p>
+<p>54.使用 move 的代码应该使用 std::move 而不是 move 。这样做可以避免潜在的名字冲突。</p>
+<p>55.移动构造函数的第一个参数是该类类型的一个右值引用，任何额外的参数都必须有默认实参。</p>
+<p>56.移动构造函数在完成资源移动之后，要保证移后源对象的资源是无害的、可析构的，因为移动构造函数不分配任何新内存，而且原对象不再指向被移动资源。</p>
+<p>57.移动操作不应抛出任何异常。</p>
+<p>58.不跑出异常的移动构造函数和移动赋值运算符都必须标记为 noexcept。</p>
+<p>59.只有当一个类没有定义任何自己版本的拷贝控制成员，且它的所有数据成员都能移动构造或移动赋值时，编译器才会为它合成移动构造函数或者移动赋值运算符。</p>
+<p>60.与拷贝操作不同，移动操作永远不会隐式定义为删除的函数。如果我们显式地要求编译器生成 =default 的移动操作，且编译器不能移动所有成员，则编译器会将移动操作定义为删除的函数。</p>
+<p>61.关于什么时候会将合成的移动操作定义为删除的函数详见 c++ prime 5th 中文版 p476。总而言之，就是有对象不能移动。</p>
+<p>62.定义了一个移动构造函数或移动赋值函数运算符的类必须也定义自己的拷贝操作。否则，合成拷贝构造函数和拷贝赋值运算符默认地被定义为删除的。</p>
+<p>63.如果一个类有一个可用的拷贝构造函数而没有移动构造函数，则其对象是通过拷贝构造函数来“移动”的。拷贝赋值运算符和移动赋值运算符的情况类似。</p>
+<p>64.关于三/五法则详见 c++ prime 5th 中文版的 p478。</p>
+<p>65.在移动构造函数和移动赋值运算符这些类实现代码之外的地方，只有当我们保证移动操作是安全的，才能可以使用 std::move。</p>
+<p>66.区分移动和拷贝的重载函数通常有一个版本接受一个 const T&amp;,而另一个版本接受一个 T&amp;&amp;。</p>
+<p>67.我们可以通过在参数列表放置一个引用限定符来声明一个右值和左值引用成员函数。</p>
+<p>68.引用限定符可以是 &amp; 或 &amp;&amp;，分别指出 this 可以指向一个左值或右值。引用限定符只能用于非 static 成员函数，且必须同时出现在函数的声明和定义中，并且引用限定符必须跟随在 const 限定符之后。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Foo <span class="title">someMem</span><span class="params">()</span> &amp; <span class="keyword">const</span></span>;    <span class="comment">//错误</span></span><br><span class="line"><span class="function">Foo <span class="title">anotherMem</span><span class="params">()</span> <span class="keyword">const</span> &amp;</span>; <span class="comment">//正确</span></span><br></pre></td></tr></table></figure></p>
+<p>69.如果一个成员函数有引用限定符，则具有相同参数列表的所有版本都必须有引用限定符。</p>
+<h2 id="重载运算与类型转换">重载运算与类型转换</h2><p>1.重载的运算符是具有特殊名字的函数：它们的名字由关键字 operator 和其后定义的运算符号组成，和其他函数一样，重载的运算符也包含返回类型、参数列表以及函数体。</p>
+<p>2.重载运算符函数的参数数量与该运算符作用的运算对象数量一样多。</p>
+<p>3.除了重载的函数调用运算符 operator() 之外，其他重载运算符不能含有默认实参。</p>
+<p>4.当一个重载的运算符是成员函数时，它的左侧运算对象会绑定到隐式的 this 指针上，所以成员运算符函数的显式参数数量比运算对象的数量少一个。</p>
+<p>5.对于一个运算符函数来说，它是类的成员或者它至少含有一个类类型的参数。</p>
+<p>6.我们只能重载已有的运算符，而无权发明新的运算符号，我们也无法改变该运算符的含义。</p>
+<p>7.我们将运算符作用于类型正确的实参，同时我们也能像调用普通函数一样调用运算符函数。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data1 + data2;              <span class="comment">//普通的表达式</span></span><br><span class="line"><span class="keyword">operator</span>+(data1,data2);     <span class="comment">//等价的函数调用。</span></span><br></pre></td></tr></table></figure></p>
+<p>8.通常情况下，不应该重载逗号、区地址、逻辑与、逻辑或运算符。</p>
+<p>9.只有当操作的含义对于用户来说清晰明了时才使用运算符重载，关于运算符重载的一些建议详见 c++ prime 5th 中文版的 p492。</p>
+<p>10.关于怎么选择将运算符定义为成员函数还是普通的非成员函数详见 c++ prime 5th 中文版的 p493。</p>
+<p>11.因为 ostream 向流写入内容的时候会改变其状态，所以输出运算符的第一个形参时一个非常量 ostream 对象的引用。第二个形参一本来说时一个常量引用，因为我们希望避免复制实参。</p>
+<p>12.输出运算符应该主要负责打印对象的内容而非控制格式，输出运算符不应该打印换行符。</p>
+<p>13.与 iostream 标准库兼容的输入输出运算符必须是普通的非成员函数，而不是类的成员函数，否则，它们的左侧运算对象将是我们的类的一个对象。</p>
+<p>14.IO 运算符通常需要读写类的非公有数据成员，所以 IO 运算符一般被声明为友元。</p>
+<p>15.输入运算符的第一个形参时运算符将要读取的流的引用，第二个形参时将要读入到的非常量对象的引用。</p>
+<p>16.输入运算符必须处理输入可能出现的失败的情况，而输出运算符不需要。在执行输入运算符时可能发生下列错误详见 c++ prime 5th 中文版的p495 。</p>
+<p>17.当读取操作发生错误时，输入运算符应该负责从错误中恢复。</p>
+<p>18.通常情况下，输入运算符只设置 failbit，除此之外，设置 eofbit 表示文件耗尽，设置 badbit 表示流被破坏。最好的方式是由 IO 标准库自己来标识这些错误。</p>
+<p>19.通常情况下，我们把算术和关系运算符定义成非成员函数以允许对左侧或右侧的运算对象进行转换。</p>
+<p>20.如果类同时定义了算术运算符和相关的复合赋值运算符，则通常情况下应该使用复合赋值来实现算术运算符。</p>
+<p>21.如果某个类在逻辑上有相等的含义，则该类应该定义 operator== ，这样做可以使得用户更容易使用标准库算法来处理这个类。</p>
+<p>22.关于相等运算符的设计准则详见 c++ prime 5th 中文版的p498。</p>
+<p>23.通常情况下关系运算符应该<br>    1.定义顺序关系，令其与关联容器中对关键字的要求一致。<br>    2.如果类同时也含有 == 运算符的话，则定义一种关系令其和 == 保持一致。特别是如果两个对象是 != 的，那么一个对象应该 &lt; 另一个。</p>
+<p>24.如果存在唯一一种逻辑可靠的 &lt; 定义，则应该考虑为这个类定义 &lt; 运算符。如果类同时还包含 == ，则当且仅当 &lt; 的定义和 == 产生的结果一致才定义 &lt; 运算符。</p>
+<p>25.我们可以重载值运算符。不论形参的类型是什么，赋值运算符都必须定义为成员函数。</p>
+<p>26.赋值运算符必须定义成类的成员，复合赋值运算符通常情况下也应该这样做。这两类运算符都应该返回左侧运算对象的引用。</p>
+<p>27.下标运算符必须是成员函数。</p>
+<p>28.如果一个类包含下标运算符，则它通常会定义一个返回普通引用的版本，和一个类的常量成员并且返回常量引用，因为下标可以出现在赋值运算符的任意一端。</p>
+<p>29.定义递增和递减运算符的类应该同时定义前置版本和后置版本，并且这些运算符通常应该被定义成类的成员。</p>
+<p>30.为了与内置版本保持一致，前置运算符应该返回递增或者递减后对象的引用，后置运算符应该返回对象的原值(递增或递减之前的值)，返回的是一个值不是引用。</p>
+<p>31.普通的重载形式无法区别这两种运算符，为了解决这个问题，后置版本接受一个额外的、但是不被使用的 int 类型的形参。当我们使用后置运算符的时候，编译器为这个形参提供一个值为 0 的实参。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">p.<span class="keyword">operator</span>++(<span class="number">0</span>) ;  </span><br><span class="line"><span class="comment">//调用后置版本，尽管传入的值会被运算符函数忽略，</span></span><br><span class="line"><span class="comment">//但必不可少，因为编译器通过它才能知道应该使用后置版本。</span></span><br><span class="line">p.<span class="keyword">operator</span>++()  ;   <span class="comment">//调用前置版本。</span></span><br></pre></td></tr></table></figure></p>
+<p>32.箭头运算符必须是类的成员，解引用运算符通常也是类的成员但是也是会有例外。</p>
+<p>33.对于形如 point-&gt;mem 的表达式对象来说，point 必须是指向类对象的指针或者是一个重载了 operator-&gt; 的类的对象。<br>根据 point 类型不同 point-&gt; 分别等价于<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(*point).mem;           </span><br><span class="line">poing.<span class="keyword">operator</span>()-&gt;mem;</span><br></pre></td></tr></table></figure></p>
+<p>34.重载的箭头运算符必须返回类的指针或者自定义了箭头运算符的某个类的对象。</p>
+<p>35.函数调用运算符必须是成员函数，一个类可以定义多个不同版本的调用运算符，相互之间应该在参数数量或类型上有所区别。</p>
+<p>36.如果类的定义了调用运算符，我们可以像使用函数一样使用该类的对象，因此这个类的对象称作函数对象。</p>
+<p>37.函数对象类除了 operator()之外也可以包含其他成员。函数对象类通常含有一些数据成员，这些成员被用于定制调用运算符中的操作。</p>
+<p>38.当我们编写一个 lambba 后，编译器将该表达式翻译成一个未命名类的未命名对象，在 lambda 表达式产生的类中含有一个重载的函数调用运算符。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//根据单词的长度进行排序，对于长度相同的单词按照字母表的顺序排序</span></span><br><span class="line">stable_sort(words.begin(), words.end(), [](<span class="keyword">const</span> <span class="built_in">string</span> &amp;a, <span class="keyword">const</span> <span class="built_in">string</span> &amp;b))</span><br><span class="line">&#123;   <span class="keyword">return</span> s1.size &lt; s2.size    &#125;;</span><br><span class="line"><span class="comment">// 等价于</span></span><br><span class="line"><span class="keyword">class</span> ShorterString</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="function"><span class="keyword">bool</span> <span class="title">operator</span><span class="params">()</span> <span class="params">(<span class="keyword">const</span> <span class="built_in">string</span> &amp;s1, <span class="keyword">const</span> <span class="built_in">string</span> &amp;s2)</span> <span class="keyword">const</span></span><br><span class="line">        </span>&#123;   <span class="keyword">return</span> s1.size() &lt; s2.size()    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>39.在默认情况下，lambda 不能改变它捕获的变量，因此在默认情况下，由 lambda 产生的类当中的函数调用运算符是一个 const 成员函数。如果 lambda 被声明为可变，则调用运算符就不是 const 的了。</p>
+<p>40.当一个 lambda 表达式通过引用捕获变量时，将由程序负责确保 lambda 执行时引用所引的对象确实存在，因此编译器可以直接使用该引用而无须在 lambda 产生的类中将其存储为数据成员。<br>相反，通过值捕获的变量被拷贝到 lambda 中，这个 lambda 产生的类必须为每个值捕获的变量建立对应的数据成员，同时创建构造函数，令其使用捕获的变量的值来初始化数据成员。</p>
+<p>41.lambda 表达式产生的类不含默认构造函数、赋值运算符以及默认析构函数;它是否含有默认的拷贝/移动构造函数则通常根据捕获的数据成员类型而定。</p>
+<p>42.关于标准库函数对象，详见 c++ prime 5th 中文版的 p510。</p>
+<p>43.表示运算符的函数对象类常用来替换算法中的默认运算符，需要特别注意的是对于函数同样适用。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sort(nameTable.begin(), nameTable.end(), less&lt;<span class="built_in">string</span>*&gt;());</span><br></pre></td></tr></table></figure></p>
+<p>44.每个 lambda 有它自己唯一的、未命名的类类型；函数及函数指针的类型则由其返回值类型和是实参类型决定。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 构建从运算符到函数指针的映射关系，其中函数接受两个 int 、 返回一个 int</span></span><br><span class="line"><span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>(*)(<span class="keyword">int</span> <span class="keyword">int</span>)&gt; binops;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123; <span class="keyword">return</span> i + j; &#125;</span><br><span class="line"><span class="keyword">auto</span> mod = [] (<span class="keyword">int</span> i, <span class="keyword">int</span> j) &#123;<span class="keyword">return</span> i % j; &#125;</span><br><span class="line">binops.insert(&#123;<span class="string">"+"</span>, add&#125;); <span class="comment">// 将 add 的指针添加到 binops 中</span></span><br><span class="line">binops.insert(&#123;<span class="string">"%"</span>, mod&#125;); </span><br><span class="line"><span class="comment">// 错误：mod 不是一个函数指针，lambda 有它自己的类类型，与存储在 binops 中的类型不匹配</span></span><br></pre></td></tr></table></figure></p>
+<p>45.两个不同类型的可调用对象有可能共享同一种调用形式，一种调用形式对应一个函数类型。<br>调用形式指明了调用返回的类型以及传递给调用的实参类型。</p>
+<p>46.关于 function 的操作详见 c++ prime 5th 中文版的 p512。</p>
+<p>47.function 是一个模板，当创建一个具体的 function 类型时我们必须提供 function 类型能表示的对象的调用形式。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function&lt;<span class="keyword">int</span>(<span class="keyword">int</span>, <span class="keyword">int</span>)&gt; f1 = add;                                <span class="comment">//函数指针</span></span><br><span class="line">function&lt;<span class="keyword">int</span>(<span class="keyword">int</span>, <span class="keyword">int</span>)&gt; f2 = divide();                          <span class="comment">//函数对象类的对象</span></span><br><span class="line">function&lt;<span class="keyword">int</span>(<span class="keyword">int</span>, <span class="keyword">int</span>)&gt; f3 = [](<span class="keyword">int</span> i, <span class="keyword">int</span> j) &#123; <span class="keyword">return</span> i * j;&#125;; <span class="comment">//lambda</span></span><br></pre></td></tr></table></figure></p>
+<p>48.我们不能直接将重载函数的名字存入 function 类型的对象中，因为容易产生二义性，不过我们可以使用存储函数指针或者 lambda 的方式来消除二义性。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>(*)(<span class="keyword">int</span> <span class="keyword">int</span>)&gt; binops;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123; <span class="keyword">return</span> i + j; &#125;</span><br><span class="line"><span class="function">Sales_data <span class="title">add</span><span class="params">(<span class="keyword">const</span> Sales_data&amp;, <span class="keyword">const</span> Sales_data&amp;)</span></span>;</span><br><span class="line">binops.insert(&#123;<span class="string">"+"</span>, add&#125;);      <span class="comment">//错误，究竟是哪个add？</span></span><br><span class="line">===============solution====================</span><br><span class="line"><span class="keyword">int</span> (*fp)(<span class="keyword">int</span>, <span class="keyword">int</span>) = add;</span><br><span class="line">binops.insert(  &#123;<span class="string">"+"</span>, fp&#125; );</span><br><span class="line">binops.insert( &#123;<span class="string">"+"</span>, [](<span class="keyword">int</span> a, <span class="keyword">int</span> b) &#123;<span class="keyword">return</span> add(a,b);&#125; &#125;);</span><br></pre></td></tr></table></figure></p>
+<p>49.新版本标准库重的 function 类与旧版本中的 unary_function 和 binary_function 没有关联，后两个类已经被 bind 函数替代了。</p>
+<p>50.转换构造函数和类型转换运算符共同定义了类类型转换，这样的转换有时也会被称作用户定义的类型转换。</p>
+<p>51.类型转换运算符是类的一种特殊成员函数，它负责将一个类类型的值转换成其他类型。类型转换函数的一般形式如下形式：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">operator</span> <span class="title">type</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br></pre></td></tr></table></figure></p>
+<p>其中 type 表示某种类型，类型转换运算符可以面向任意类型(除 void 之外)进行定义，只要该类型能作为函数的返回类型。<br>因此我们不允许转换成数组或者函数类型，但允许转换成指针或引用类型。</p>
+<p>52.一个类型转换函数必须是类的成员函数；它不能声明返回类型，形参列表也必须为空。类型转换函数通常应该是 const 。</p>
+<p>53.尽管编译器一次只能执行一个用户定义的类型转换，但是隐式的用户定义类型转换可以置于标准(内置)类型转换之前或之后，并与其一起使用。</p>
+<p>54.因为类型转换运算符是隐式执行的，所以无法给这些函数传递实参。尽管类型转换函数不负责指定返回类型，但实际上每个类型转换函数都会返回一个对应类型的值。</p>
+<p>55.如果在类类型和转换类型之间不存在明显的映射关系，则这样的类型转换可能具有误导性。</p>
+<p>56.为了防止类型转换之后的类型再进行隐式转换， c++ 11 新标准引入了显式的类型转换运算符<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> SmallInt</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="keyword">operator</span> <span class="title">int</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123;<span class="keyword">return</span> val;&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">std</span>::<span class="keyword">size_t</span> val;</span><br><span class="line">&#125;</span><br><span class="line">si + <span class="number">6</span>;            </span><br><span class="line"><span class="comment">// 错误：此处需要隐式的类型转换，但类的运算符是显式的</span></span><br><span class="line"><span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt; (si) + <span class="number">3</span>;  </span><br><span class="line"><span class="comment">//正确：显式地请求类型转换</span></span><br></pre></td></tr></table></figure></p>
+<p>57.当表达式出现在下列位置时，显式的类型转换将被隐式地执行</p>
+<ul>
+<li>if、while及do语句的条件部分</li>
+<li>for 语句头的条件表达式</li>
+<li>逻辑非运算符（!）、逻辑或运算符（||）、逻辑与运算符（&amp;&amp;）的运算对象</li>
+<li>条件运算符（? :）的条件表达式</li>
+</ul>
+<p>58.向 bool 的类型转换通常用在条件部分，因此 operator bool 一般定义成 explicit。</p>
+<p>59.通常情况下，不要为类定义相同得类型转换，也不要在类中定义两个及两个以上转换源或转换目标是算术类型(int 、 double)的转换。</p>
+<p>60.当我们使用两个用户定义的类型转换时，如果转换函数之前或之后存在标准类型转换，则标准类型转换将决定最佳匹配到底是哪个。</p>
+<p>61.类型转换与运算符设计的经验，总的来说：除了显式地向 bool 类型的转换之外，我们应该尽量避免定义类型转换函数并尽可能地限制那些“显然正确”的非显式构造函数。</p>
+<ul>
+<li>不要令两个类执行相同的类型转换</li>
+<li>避免转换目标是内置算术类型的类型转换。特别是我们已经定义一个转换成算术类型的类型转换。</li>
+<li>不要再定义接受算术类型的重载运算符。如果用户需要使用这样的运算符，则类型转换操作将转换我们的类型的对象，然后使用内置的运算符。</li>
+<li>不要定义转换到多种算术类型的类型转换。让标准类型转换完成向其他算术类型转换的工作</li>
+</ul>
+<p>62.如果在调用重载函数时，我们需要使用构造函数或者强制类型转换来改变实参的类型，则这通常意味着程序的设计存在不足。</p>
+<p>63.在调用重载函数时，如果需要额外的标准类型转换，则该转换的级别只有当所有可行函数都请求同一个用户定义的类型转换时才有用。如果所需的用户定义的类型转换不止一个，则该调用具有二义性。</p>
+<p>64.表达式中运算符的候选函数集既应该包括成员函数，也应该包括非成员函数。</p>
+<p>65.如果我们对同一个类既提供了转换目标是算术类型的类型转换，也提供了重载的运算符，则将会遇到重载运算符与内置运算符的二义性问题。</p>
+<h2 id="面向对象程序设计">面向对象程序设计</h2><p>1.面向对象程序设计的核心思想是数据抽象、继承和动态绑定。</p>
+<p>2.通过继承联系在一起的类构成的一种层次关系，在层次关系的根部有一个基类，其他类则直接或间接地从基类继承而来，这些继承得来的类称为派生类。</p>
+<p>3.如果基类希望它的派生类各自定义适合自身的版本，此时基类就将这些函数声明成虚函数。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Quote</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">std</span>::<span class="function"><span class="built_in">string</span> <span class="title">isbn</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">double</span> <span class="title">net_price</span><span class="params">(<span class="built_in">std</span>::size_t n)</span> <span class="keyword">const</span></span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>4.派生类必须使用类派生列表明确指出它从哪些基类继承而来。类派生列表的形式是：首先是一个冒号，后面紧跟以逗号分隔的基类列表，其中每个基类前面可以有访问说明符。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Bulk_quote : <span class="keyword">public</span> Quote</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">net_price</span><span class="params">(<span class="built_in">std</span>::size_t)</span> <span class="keyword">const</span> override</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>5.当我们使用基类的引用（或指针）调用一个虚函数时将发生动态绑定，即在运行时，根据引用或指针所绑定的对象类型不同，选择不同的函数版本，有可能是基类的版本也有可能是派生类的版本。</p>
+<p>6.基类通常都应该定义一个虚析构函数，即使该函数不执行任何实际操作也是如此。</p>
+<p>7.关键字 virtual 只能出现在类内部的声明语句之前而不能用于类外部的函数定义。</p>
+<p>8.如果基类把一个函数声明成虚函数，则该函数在派生类中隐式地也是虚函数。</p>
+<p>9.成员函数如果没被声明为虚函数，则其解析过程发生在编译时而非运行时。</p>
+<p>10.基类中用 protect 运算符修饰的成员只能被基类本身或者派生类访问，但是其他公共对象无法访问。</p>
+<p>11.类的派生类列表里，每个基类前面可以有 public protect private 的其中一个。</p>
+<p>12.派生类必须重新声明那些继承而来的成员函数中需要覆盖而来的函数。</p>
+<p>13.如果一个派生是公有的，则基类的公有成员也是派生类接口的组成部分，因此我们能将公有派生类类型的对象绑定到基类的引用或指针上。</p>
+<p>14.派生类经常(但不总是)覆盖它的继承的虚函数。如果派生类没有覆盖其基类中的某个虚函数，则该虚函数的行为类似于其他的普通成员，派生类会直接继承其在基类中的版本。</p>
+<p>15.c++ 11 允许派生类显式地注明它使用某个成员函数覆盖了它继承的虚函数。具体做法是在形参列表后面、或者在 const 成员函数的 const 关键字后面、或者在引用成员函数的引用限定符后面添加一个关键字 override 。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> B </span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">f1</span><span class="params">(<span class="keyword">int</span>)</span> <span class="keyword">const</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">f2</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">f3</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">struct</span> D1 : B </span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">f1</span><span class="params">(<span class="keyword">int</span>)</span> <span class="keyword">const</span> override</span>;    <span class="comment">//正确：f1 与基类中的 f1 匹配</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">f2</span><span class="params">(<span class="keyword">int</span>)</span> override</span>;          <span class="comment">//错误：B 没有形如 f2(int)的函数</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">f3</span><span class="params">()</span> override</span>;             <span class="comment">//错误：f3 不是虚函数</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">f4</span><span class="params">()</span> override</span>;             <span class="comment">//错误：B 没有名为 f4 的函数</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>16.我们能把派生类的对象当成基类对象来使用，而且我们也能将基类指针或引用绑定到派生类对象中的基类部分上，因为派生类对象中含有与其基类对应的组成部分。</p>
+<p>17.派生类不能直接初始化从基类继承而来的成员，派生类必须使用基类的构造函数来初始化它的基类部分。</p>
+<p>18.派生类对象的基类部分与派生类对象自己的数据成员都是在构造函数的初始化阶段执行初始化操作的。首先初始化基类的部分，然后按照声明的顺序依次初始化派生类的成员。</p>
+<p>19.如果我们想使用其他的基类构造函数，我们需要以类名加圆括号内的实参列表的形式为构造函数提供初始值。</p>
+<p>20.如果基类定义了一个静态成员，则在整个继承体系中只存在该成员的唯一定义。</p>
+<p>21.派生类的声明与其他类差别不大，声明中包含类名，但是不包含它的派生列表。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Bulk_quote : <span class="keyword">public</span> Quote; <span class="comment">// 错误：派生类列表不能出现在这里</span></span><br><span class="line"><span class="keyword">class</span> Bulk_quote;                <span class="comment">// 正确</span></span><br></pre></td></tr></table></figure></p>
+<p>22.如果我们想将某个类用作基类，则这个类必须已经定义而非仅仅声明，即一个类不能派生它本身。</p>
+<p>23.最终的派生类将包含它的直接基类的子对象以及每个间接基类的子对象。</p>
+<p>24.c++ 11 新标准提供了一种防止继承发生的方法，即在类名后跟一个关键字 final。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> D2 : B</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">f1</span><span class="params">(<span class="keyword">int</span>)</span> <span class="keyword">const</span> final</span>;       <span class="comment">//不允许后续的其他类覆盖 f1(int)</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">struct</span> D3 : D2</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">f2</span><span class="params">()</span></span>;                      <span class="comment">//正确：覆盖从间接基类B继承而来的 f2</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">f1</span><span class="params">(<span class="keyword">int</span>)</span> <span class="keyword">const</span></span>;             <span class="comment">//错误：D2 已经将 f2 声明成 final</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>25.我们可以将基类的指针或引用绑定到派生类对象上，因此当使用基类的指针或者引用时，实际上我们并不清楚该指针或引用所绑定对象的真实类型(动态绑定)。</p>
+<p>26.和内置指针一样，智能指针类也支持派生类向基类的类型转换，这意味着我们可以将一个派生类对象的指针存储在一个基类的智能指针内，因为每个派生类对象都包含一个基类部分。</p>
+<p>27.当我们使用存在继承关系的类型时，必须将一个变量或其他表达式的静态类型与该表达式表示对象的动态类型区分开来。</p>
+<p>28.表达式的静态类型在编译时总是已知的，它是变量声明时的类型或表达式生成的类型；动态类型则是变量或表达式表示的内存中的对象的类型，动态类型直到运行时才可知。</p>
+<p>29.不存在从基类向派生类的自动类型转换，因为一个基类的对象可能时派生类对象的一部分。</p>
+<p>30.如果在基类中含有一个或多个虚函数，我们可以使用 dynamic_cast 请求一个类型转换，该转换的安全检查将在运行时执行。</p>
+<p>31.如果我们已知某个基类向派生类的转换时安全的，则我们可以使用 static_cast 来强制覆盖掉编译器的检查工作。</p>
+<p>32.派生类向基类的自动类型转换只对指针或引用类型有效，在派生类类型和基类类型之间不存在这样的转换。</p>
+<p>33.当我们用一个派生类对象为一个基类对象初始化或赋值时，只有该派生类对象中的基类部分会被拷贝、移动或赋值，它的派生类会被忽略掉(切掉、截断)。</p>
+<p>34.在具有继承关系的类之间进行类型转换，有三点非常重要：</p>
+<ul>
+<li>从派生类向基类的类型转换只对指针或引用类型有效。</li>
+<li>基类向派生类不存在隐式类型转换。</li>
+<li>和任何其他成员一样，派生类向基类的类型转换也可能会由于访问受限而变得不可行。</li>
+</ul>
+<p>35.当且仅当对通过指针或引用调用虚函数时，才会在运行时解析该调用，也只有在这种情况下对象的动态类型才有可能与静态类型不同。</p>
+<p>36.对非虚函数的调用在编译时进行绑定，对象的类型是确定不变的，我们无论如何都不可能令对象的动态类型与静态类型不一致。</p>
+<p>37.一旦某个函数被声明成虚函数，则在所有派生类中它都是虚函数。</p>
+<p>38.当派生类覆盖了某个虚函数时。该函数在基类中的形参必须与派生类中的形参严格匹配，当然返回类型也必须与基类函数匹配。</p>
+<p>39.如果派生类定义了一个函数与基类中虚函数的名字相同但是形参列表不同，这仍然是合法行为，编译器将认为新定义的这个函数与基类中原有的函数是相互独立的，派生类的函数并没有覆盖掉基类中的版本。</p>
+<p>40.如果虚函数使用默认实参，则基类和派生类中定义的默认实参最好一致。因为如果我们通过基类的引用或指针调用函数，则使用基类中定义的默认实参；如果实际运行的是派生类中的函数版本也是传入基类函数定义的默认实参。</p>
+<p>41.通常只有成员函数(或友元)中的代码才需要使用作用域运算符来回避虚函数的机制，在这种情况下，基类的版本通常完成继承层次种所有类型都要做的共同任务，而派生类中定义的版本需要执行一些与派生类本身密切相关的操作。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> undiscounted = baseP-&gt;Quote::net_price(<span class="number">42</span>);</span><br></pre></td></tr></table></figure></p>
+<p>42.如果一个派生类虚函数需要调用它的基类版本，但是没有使用作用域运算符，则在运行时该调用将被解析为对派生类版本自身的调用，从而导致无限递归(虚函数-&gt;找不到基类对应版本入口-&gt;继续调用虚函数版本……)。</p>
+<p>43.如果我们需要让每个派生类都定义它自身的某个属性，那么我们可以将一个虚函数说明为纯为函数。</p>
+<p>44.一个纯虚函数域普通虚函数不一样，一个纯虚函数无序定义。我们只要通过在函数体声明语句的分号之前书写 =0 就可以将一个虚函数说明为纯虚函数。其中， =0 只能出现在类内部的虚函数声明语句处。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Dis_quote : <span class="keyword">public</span> Quote</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="function"><span class="keyword">double</span> <span class="title">net_price</span><span class="params">(<span class="built_in">std</span>::size_t)</span> <span class="keyword">const</span> </span>= <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">        <span class="built_in">std</span>::<span class="keyword">size_t</span> quantity = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">double</span> discount = <span class="number">0.0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>45.含有或者未竟覆盖直接继承纯虚函数的类是抽象基类。抽象基类负责定义接口，而后续的其他类可以覆盖该接口，因此我们不能定义抽象基类的对象。</p>
+<p>46.protect 运算符可以看作是 public 和 private 中和的产物：</p>
+<ul>
+<li>和私有成员类似，受保护的成员对于类的用户来说是不可访问的。</li>
+<li>和公有成员类似，受保护的成员对于派生类的成员 和 友元(基类的友元)来说是可以访问的。</li>
+<li>派生类的成员 或 友元只能通过派生类对象来访问基类的受保护成员，派生类对于一个基类对象中的受保护成员没有任何访问特权。<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 为了理解最后一条规则，看一下下面的例子</span></span><br><span class="line"><span class="keyword">class</span> Base </span><br><span class="line">&#123;</span><br><span class="line">protect :</span><br><span class="line">    <span class="keyword">int</span> prot_mem;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> Sneaky : <span class="keyword">public</span> Base</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">friend</span> <span class="keyword">void</span> <span class="title">clobber</span><span class="params">(Sneaky&amp;)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">friend</span> <span class="keyword">void</span> <span class="title">clobber</span><span class="params">(Base)</span></span>;</span><br><span class="line">    <span class="keyword">int</span> j;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">clobber</span><span class="params">(Sneaky &amp;s)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    s.j = s.prot_mem = <span class="number">0</span>;   </span><br><span class="line"><span class="comment">// 正确：clobber 能访问 Sneaky 对象的 private 和 protected 成员</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">clobber</span><span class="params">(Base &amp;b)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    b.prot_mem = <span class="number">0</span>;     <span class="comment">// 错误：clobber 不能访问 Base 的 protect 成员</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>47.派生类的成员和友元只能访问派生类对象中的基类部分的受保护成员；对于普通的基类对象中的成员不具有特殊的访问权限。</p>
+<p>48.某个类对其继承而来的成员的访问权限受到两个因素影响：一是基类中该成员的访问说明符，二是在派生类的派生列表中的说明符。</p>
+<p>49.派生访问说明符的目的是控制派生类用户(包括派生类的派生类在内)对于类成员的访问权限，以及控制继承自派生类的新类的访问权限。<br>派生访问说明符对于派生类的成员(及友元)能否访问其直接基类的成员没有影响，对基类成员的访问权限只与基类中的访问说明符有关。<br>一篇有趣的补充博文<a href="https://segmentfault.com/a/1190000002868033" target="_blank" rel="external">传送门</a><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Base</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> :</span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">pub_mem</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="keyword">protected</span> :</span><br><span class="line">        <span class="keyword">int</span> prot_mem;</span><br><span class="line">    <span class="keyword">private</span> :</span><br><span class="line">        <span class="keyword">char</span> priv_mem;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">struct</span> Pub_Dery : <span class="keyword">public</span> Base</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> prot_mem; &#125;    <span class="comment">//正确 派生类能访问 protected 成员</span></span><br><span class="line">    <span class="function"><span class="keyword">char</span> <span class="title">g</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> priv_mem; &#125;   <span class="comment">//错误 派生类不能访问 private 成员</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">struct</span> Priv_Derv : <span class="keyword">private</span> Base</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">f1</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> prot_mem;&#125;  </span><br><span class="line">    <span class="comment">// private 不影响派生类的访问权限 prot_mem 是 protected 成员</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Pub_Derv d1;        <span class="comment">//继承自Base的成员是public</span></span><br><span class="line">Priv_Derv d2;       <span class="comment">//继承自Base的成员是private</span></span><br><span class="line">d1.pub_mem();       <span class="comment">//正确：pub_mem 在派生类中是 public</span></span><br><span class="line">d2.pub_mem();       <span class="comment">//错误: pub_mem 在派生类中是 private</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> Derived_from_Public : <span class="keyword">public</span> Pub_Derv</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">use_base</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> prot_mem;&#125; ;  </span><br><span class="line">    <span class="comment">// 正确：Base::prot_mem 在 Pub_Derv 中仍然是 protected</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> Derived_from_Private : <span class="keyword">public</span> Priv_Derv</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">use_base</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> prot_mem ;&#125;; </span><br><span class="line">    <span class="comment">// 错误：Base::prot_mem 在 Priv_Derv 中是 private的</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>50.对于代码中的某个给定节点来说，如果基类的公有成员是可访问的，则派生类向基类的类型转换也是可转换的，反之则不行。详见 c++ prime 5th 中文版的 p544。</p>
+<p>51.关于类的设计与受保护的成员详见 c++ prime 5th 中文版的p544。</p>
+<p>52.我们不能继承友元关系，每个类负责控制各自成员的访问权限。</p>
+<p>53.struct 和 class 唯一的差别是 class 关键字定义的派生类默认是私有继承的；而 struct 关键字定义的派生类默认是公有继承的。</p>
+<p>54.派生类只能为那些它可以访问的名字提供 using 声明，即收到 public 、 protect 、 private 等关键字的限制。详见 c++ prime　5th 中文版的p546。</p>
+<p>55.当存在继承关系时，派生类的作用域嵌套在其基类的作用域之内。如果一个名字在派生类的作用域内无法正确解析，则编译器将继续在外层的基类作用域中寻找该名字的定义。</p>
+<p>56.派生类的成员将隐藏同名的基类成员，因此除了覆盖继承而来的虚函数之外，派生类最好不要重用其他定义在基类中的名字。</p>
+<p>57.关于名字查找与继承详见 c++ prime 5th 中文版的p549。</p>
+<p>58.如果派生类希望所有的重载版本对于它来说都是可见的，那么它需要覆盖所有的版本，或者一个也不覆盖，或者用 using 声明重载的成员。</p>
+<p>59.如果我们删除的是一个指向派生类对象的基类指针，则需要虚析构函数，否则会产生未定义行为。</p>
+<p>60.一个基类总是需要析构函数，但是这个析构函数虽然能设定为虚函数，但是不能为空，因为我们无法由此判断该基类还需要赋值运算符或拷贝构造函数。</p>
+<p>61.虚析构函数将阻止合成移动操作，如果一个类定义了析构函数，即使它通过 =default 的形式使用了合成的版本，编译器也不会为这个类合成移动操作。</p>
+<p>62.对于派生类的析构函数来说，它除了销毁派生类自己的成员外，还负责销毁派生类的直接基类；该直接基类又销毁它自己的直接基类，以此类推直至继承链的顶端。</p>
+<p>63.关于派生类删除的拷贝控制与基类的关系详见 c++ prime 5th 中文版的 p553。</p>
+<p>64.如果在基类中没有默认、拷贝或移动构造函数，则一般情况下派生类也不会定义相应的操作。</p>
+<p>65.大多数基类都会定义一个虚析构函数，在默认情况下，基类不含有合成的移动操作，而且在它的派生类中也没有合成的移动操作。因为基类缺少移动操作会阻止派生类拥有自己的合成移动操作，所以当我们的确需要执行移动操作时，应该首先在基类中进行定义。</p>
+<p>66.和构造函数及赋值运算符不同的是，析构函数只负责销毁派生类自己分配的资源，派生类的析构函数首先执行，然后是基类的析构函数，如此类推，沿着继承体系的反方向直至最后。</p>
+<p>67.派生类定义了拷贝和移动操作时，该操作负责拷贝或移动包括基类部分成员在内的整个对象。</p>
+<p>68.在默认情况下，基类默认构造函数初始化派生类对象的基类部分。如果我们想拷贝（或移动）基类部分，则必须在派生类的构造函数初始值列表中显式地使用基类的拷贝（移动）构造函数</p>
+<p>69.当基类的构造函数执行时，该对象的派生类部分是未被初始化的状态。反过来，当执行基类的析构函数时，派生类的部分已经销毁了。在这种情况下，编译器认为对象的类型在构造或者析构的过程中，对象的类和构造(析构)函数的类看作时同一个，就例如虚函数的调用绑定。</p>
+<p>70.如果构造函数或析构函数调用了某个虚函数，则我们应该执行与构造函数或析构函数所属类型相对应的虚函数版本。</p>
+<p>71.一个类也只继承其直接基类的构造函数，不能继承默认、拷贝和移动构造函数，如果派生类没有直接定义这些构造函数，则编译器将为派生类合成它们。</p>
+<p>72.通常情况下，using 声明语句只是令某个名字在当前作用于可见，而当作用于构造函数时，using声明语句将令编译器产生代码。对于基类的每个构造函数，编译器都生成一个与之对应的派生类构造函数。如果派生类含有自己的数据成员，则这些成员将被默认初始化。</p>
+<p>73.一个构造函数的 using 声明不会改变在该构造函数的访问级别。例如，基类的私有构造函数在派生类中还是一个私有构造函数。</p>
+<p>74.一个 using 声明语句不能指定 explicit 或者 constexpr，如果基类的构造函数时 explicit 或者 constexpr ，则继承的构造函数也拥有同样的属性。</p>
+<p>75.当一个基类构造函数含有默认实参时，这些实参并不会被继承。相反，派生类将会获得多个继承的构造函数，其中每个构造函数分别省略掉一个含有默认实参的形参。<br>例如：如果基类有一个接受两个形参的构造函数，其中第二个形参含有默认实参，则派生类将获得两个构造函数：一个构造函数接受两个形参（没有默认实参），另一个构造函数只接受一个形参，它对应基类中最左侧的没有默认值的那个形参。</p>
+<p>76.如果基类含有几个构造函数，大多数时候派生类会继承所有这些构造函数，但是有两个例外：</p>
+<ul>
+<li>一：派生类可以继承一部分构造函数，而其他构造函数定义自己的版本，如果派生类定义的构造函数与基类的构造函数具有相同的参数列表，则该构造函数将不会被继承，定义在派生类中的构造函数将会替换继承而来的构造函数。</li>
+<li>二：默认、拷贝和移动构造函数不会继承，这些构造函数按照正常规则被合成。继承的构造函数不会被作为用户定义的构造函数来使用，如果一个类只含有继承而来的构造函数，则它也将拥有一个合成的默认构造函数。（初始化派生类的成员）</li>
+</ul>
+<p>77.当我们希望在容器中存放具有继承关系的对象时，我们实际上存放的是基类的(智能)指针。和往常一样，这些指针所指的对象的动态类型可能是基类类型，也可能是派生类类型。(shared_ptr 支持派生类向基类的类型转换)</p>
+<p>78.当我们令一个类公有地继承另一个类时，派生类应该反映与基类的 “is A”的关系，即派生类是基类的某种具现形式。而且公有派生类的对象应该可以用在任何需要基类对象的地方，类似一种包括的关系。类型之间的另一种常见关系就是“has A”，即这种关系的类应该组合成成员。</p>
+<h2 id="模板与泛型编程">模板与泛型编程</h2><p>1.模板是 c++ 中 泛型编程的基础，一个模板就是一个创建类或函数的公式。</p>
+<p>2.模板定义从关键字 template 开始，后面跟一个模板参数列表，这是一个逗号分隔的一个或多个模板参数(template parameter)列表，用小于号(&lt;)和大于号(&gt;) 包围起来。<br>例如，我们可以定义一个函数模板：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; </span><br><span class="line"><span class="comment">// 声明了一个 T 的类型参数，表示一个类型，</span></span><br><span class="line"><span class="comment">// T的实际类型在编译时根据 compare 的使用情况来确定</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">compare</span><span class="params">(<span class="keyword">const</span> T &amp; v1, <span class="keyword">const</span> T &amp;v2)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(v1 &lt; v2) <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(v1 &gt; v2) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>3.在模板定义中，模板参数列表不能为空，类似地，我们可以显式或隐式的指定模板实参绑定到模板参数上。</p>
+<p>4.编译器用推断出的模板参数来生成的函数版本的过程叫作实例化，这些生成出来的函数叫作实例。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实例化出 int compare(const int&amp; , const int&amp;)</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; compare(<span class="number">1</span>,<span class="number">0</span>) &lt;&lt; endl; <span class="comment">// T 为 int</span></span><br><span class="line"><span class="comment">// 实例化出 int compare(const vector&lt;int&gt;&amp;, const vector&lt;int&gt;)</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; compare(vec1 , vec2) &lt;&lt; endl;</span><br></pre></td></tr></table></figure></p>
+<p>5.在 compare 函数中的 T 就是一个模板类型参数(type parameter)。类型参数前必须使用关键字 class 或 typename 。一般来说，我们可以将类型参数看作类型说明符，就像内置类型或类类型说明符一样使用。<br>类型参数可以用来指定返回类型或函数的参数类型，以及在函数体内用于变量的声明或类型转换。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="function">T <span class="title">foo</span><span class="params">(T* p)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    T tmp = *p;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    <span class="keyword">return</span> tmp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T , <span class="keyword">class</span> U&gt; calc (<span class="keyword">const</span> T&amp; , <span class="keyword">const</span> U&amp;);</span><br></pre></td></tr></table></figure></p>
+<p>6.我们还可以在模板中定义非类型参数，一个非类型参数表示一个值而不是一个类型，这些值必须是常量表达式。我们通过一个特定的类型名而不是关键字 class 或 typename 来指定非类型变量。</p>
+<p>7.一个非类型参数可以是一个整型，或者是一个指向对象或函数类型的指针或左值引用。绑定到非类型整型参数的实参必须是一个常量表达式。<br>绑定到指针或引用非类型参数的实参必须具有静态的生存期。我们不能用一个普通局部变量或动态对象作为指针或引用非类型模板参数的实参。指针参数可以是 nullptr 或一个值为 0 的常量表达式来实例化。</p>
+<p>8.函数模板可以声明为 inline 或 constexpr。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// inline 说明符跟在模板参数列表之后</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="function"><span class="keyword">inline</span> T <span class="title">min</span> <span class="params">(<span class="keyword">const</span> T&amp; , <span class="keyword">const</span> T&amp;)</span></span>;</span><br></pre></td></tr></table></figure></p>
+<p>9.模板程序应该尽量减少对实参类型的要求，模板中的函数参数是 const的引用，函数体中的条件判断尽量仅使用 &lt; 比较运算。</p>
+<p>10.当编译器遇到一个模板定义时，它并不生成代码。只有当我们实例化出模板的一个特定版本时，编译器才会生成代码。<br>为了生成一个实例化版本，编译器需要掌握函数模板或类模板成员函数的定义。</p>
+<p>11.函数模板和类模板成员函数的<strong>定义</strong>通常放在头文件中，因此与非模板代码不同，模板的头文件通常既包括声明也包括定义。</p>
+<p>12.模板包含两种名字：</p>
+<ul>
+<li>那些不依赖于模板参数的名字</li>
+<li>那些依赖于模板参数的名字</li>
+</ul>
+<p>当使用模板时，所有不依赖于模板参数的名字都必须是可见的，这是由模板的提供者来保证的。因此，模板的设计者应该提供一个头文件，包含模板定义以及在类模板或成员定义中用到的所有名字的声明。模板的用户必须包含模板的头文件，以及用来实例化模板的任何类型的头文件。</p>
+<p>13.当我们编写模板时，代码不能使针对特定类型的，但模板代码通常对其所使用的类型有一些假设。</p>
+<p>14.通常，编译器会在三个阶段报告错误：</p>
+<ul>
+<li>第一个阶段是编译模板本身时。编译器可以检查语法错误。</li>
+<li>第二个阶段是编译器遇到模板使用时，在这个阶段，编译器对于函数模板调用会检查实参数目是否正确，还能检查参数类型是否匹配；对于类模板，编译器可以检查用户是否提供了正确数目的模板实参。</li>
+<li>第三个阶段是模板实例化时，只有这个阶段才能发现类型相关的错误。依赖于编译器如何管理实例化，这类错误可能在链接时才报告。</li>
+</ul>
+<p>15.保证传递给模板实参支持模板所要求的操作，以及这些在模板中能正确工作是调用者的责任。</p>
+<p>16.一个类模板的每个实例都形成一个独立的类。每个实例之间没有关联，也没有特殊的访问权限。</p>
+<p>17.为了阅读模板类代码，我们应该记住类模板的名字不是一个类型名。类模板用来实例化类型，而一个实例化的类型总是包含模板参数的。</p>
+<p>18.类模板的成员函数本身是一个普通函数，但是类模板的每个实例都有其自己版本的成员函数，类模板的成员函数具有和模板相同的模板参数。因而，定义在类模板之外的成员函数就必须以关键字 template 开始，后接类模板参数。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">ret-type Blob&lt;T&gt;::member-name(parm-<span class="built_in">list</span>)</span><br></pre></td></tr></table></figure></p>
+<p>19.默认情况下，对于一个已经实例化的类模板，其成员只有在使用时才被实例化。</p>
+<p>20.当我们使用一个类模板类型时必须提供模板实参，但如果在类模板自己的作用于中，我们可以直接使用模板命而不提供实参。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keyword">class</span> BlobPtr</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        ··· <span class="comment">// do something</span></span><br><span class="line">        BlobPtr &amp; <span class="keyword">operator</span>++();</span><br><span class="line">        <span class="comment">// 正确：编译器处理时按照 BlobPtr&lt;T&gt;&amp; operator++();</span></span><br><span class="line">        BlobPtr &amp; <span class="keyword">operator</span>--();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>21.当我们在类模板外定义其成员时，我们并不在类的作用域中，直到遇到类名才表示进入类的作用域。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">**BlobPtr&lt;T&gt;** BlobPtr&lt;T&gt;::<span class="keyword">operator</span>++(<span class="keyword">int</span>)</span><br><span class="line"><span class="comment">// 返回类型在作用域外，必须要指出返回类型是一个实例化的 BlobPtr</span></span><br><span class="line">&#123;</span><br><span class="line">    BlobPtr ret = *<span class="keyword">this</span>; </span><br><span class="line">    <span class="comment">// ret 已经在作用域内，不用重复模板实参</span></span><br><span class="line">    ++*<span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>22.当一个类包含一个友元声明时，类与友元各自是否是模板是相互没有无关的。如果一个类模板包含一个非模板友元，则友元被授权可以访问所有模板实例，如果友元自身是模板，类可以授权给所有友元模板实例，也可以只授权给特定实例。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在将模板的一个特定实例声明为友元时要先前置声明</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keyword">class</span> Pal;</span><br><span class="line"><span class="keyword">class</span> c</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 用类 C 实例化的Pal是C的一个友元</span></span><br><span class="line">    <span class="keyword">friend</span> <span class="keyword">class</span> Pal&lt;C&gt;;</span><br><span class="line">    <span class="comment">//Pal2 的所有实例都是 C 的友元，这种情况无需前置声明</span></span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keyword">friend</span> <span class="keyword">class</span> Pal2;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keyword">class</span> vec2</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// C2 的每个实例将相同实例化的 Pal 运算符一般被声明为友元</span></span><br><span class="line">    <span class="keyword">friend</span> <span class="keyword">class</span> Pal&lt;T&gt;; <span class="comment">// 一对一</span></span><br><span class="line">    <span class="comment">// Pal2 的所有实例都是 C2 的每个实例的友元，不需要前置声明</span></span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> ***X***&gt; <span class="keyword">friend</span> <span class="keyword">class</span> Pal2; <span class="comment">// 多对多</span></span><br><span class="line">    <span class="comment">// Pal3 是一个非模板类，它是 C2 所有实例的友元</span></span><br><span class="line">    <span class="keyword">friend</span> <span class="keyword">class</span> Pal3;    <span class="comment">// 多对一</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 为了让所有实例成为友元，友元声明中必须使用与类模板本身不同的模板参数</span></span><br></pre></td></tr></table></figure></p>
+<p>23.在新标准中，我们可以将模板类型参数声明为友元：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Tyepe&gt; <span class="keyword">class</span> Bar</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">friend</span> Type; <span class="comment">// 将访问权限授予用来实例化 Bar 的类型</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>24.类模板的一个实例定义了一个类类型，与任何其他类类型一样，我们可以定义一个别名。一个模板类型别名时一族类的别名。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">using</span> twin = pair&lt;T,T&gt;;</span><br><span class="line"><span class="comment">// authors 是一个 pair&lt;string,string&gt;</span></span><br><span class="line">twin&lt;<span class="built_in">string</span>&gt; authors;</span><br></pre></td></tr></table></figure></p>
+<p>25.我们定义一个模板类型别名时，可以固定一个或多个模板参数<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keyword">using</span> partNo </span><br><span class="line">partNO&lt;<span class="built_in">string</span>&gt; books; <span class="comment">// books 是一个 pair&lt;string,unsigned&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>26.与任何其他类相同，类模板可以声明 static 成员，与任何其他 static 数据成员相同，模板类的每个 static 数据成员必须有且仅有一个定义。但是，类的模板的每个实例都有一个独有的 static 对象。这时，我们可以将 static 数据成员也定义成模板。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">size_t</span> Foo&lt;T&gt;::ctr = <span class="number">0</span>;</span><br></pre></td></tr></table></figure></p>
+<p>27.类似任何其他成员函数，一个 static 成员函数只有在使用时才会实例化。当然，在我们通过类类直接访问 static 成员，我们必须引用一个特定的实例。</p>
+<p>28.类似函数参数的名字，一个模板参数的名字也没有什么内在的含义。我们通常将类型参数命名为 T，但实际上我们可以使用任何名字。但是，与大多数其他上下文不同，在模板内不能重用模板参数名。所以一个模板参数名在一个特定模板参数列表中只能出现一次。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> doubleA;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> A,<span class="keyword">typename</span> B&gt; <span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(A a, B b)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    A tmp = a;</span><br><span class="line">    <span class="keyword">double</span> B; <span class="comment">// 错误：重声明模板参数 B</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>29.一个特定文件所需要的模板声明通常一起放置在文件开始位置，出现于任何使用这些模板的代码之前。模板声明必须包含模板参数。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="function"><span class="keyword">int</span> <span class="title">compare</span><span class="params">(<span class="keyword">const</span> T&amp;, <span class="keyword">const</span> T&amp;)</span></span>;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keyword">class</span> Blob;</span><br></pre></td></tr></table></figure></p>
+<p>30.默认情况下，c++ 假定通过作用域运算符访问的名字不是类型，而是成员。<br>如果我们希望通知编译器一个名字表示类型时，必须使用关键字 typename ，而不能使用class。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">***<span class="keyword">typename</span>*** ***T::<span class="keyword">value_t</span>ype*** top(<span class="keyword">const</span> T&amp; c)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(!c.empty())</span><br><span class="line">        <span class="keyword">return</span> c.back();</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">typename</span> T::<span class="keyword">value_t</span>ype();      </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>31.我们可以给函数和类模板提供默认实参，与函数默认实参一样，对于一个模板参数，只有当它右侧的所有参数都有默认实参时，它才可以有默认实参。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// compare 有一个默认模板实参 less&lt;T&gt; 和一个默认函数实参 F()</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T,<span class="keyword">typename</span> F = less&lt;T&gt;&gt;</span><br><span class="line"><span class="keyword">int</span> compare &lt;<span class="keyword">typename</span> T &amp;v1 , <span class="keyword">typename</span> T &amp;v2, F f = F()&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(f(v1,v2)) <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(f(v2,v1)) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>32.如果一个类模板为其所有模板参数都提供了默认实参，且我们希望使用这些默认实参，就必须在模板名之后跟一个空尖括号对。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T = <span class="keyword">int</span>&gt; <span class="keyword">class</span> Numbers</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        Numbers(T v = ) : val(<span class="number">0</span>) &#123; &#125;</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">        T val;</span><br><span class="line">&#125;</span><br><span class="line">Numbers&lt;<span class="keyword">long</span> <span class="keyword">double</span>&gt; lots_of_precision;</span><br><span class="line">Numbers&lt;&gt; average_precision;  <span class="comment">// 使用默认类型</span></span><br></pre></td></tr></table></figure></p>
+<p>33.一个类无论是普通类还是类模板，可以包含本身是模板的成员函数。这种成员被成为成员模板。成员模板不能是虚函数。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> DebugDelete</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        DebugDelete(<span class="built_in">std</span>::ostream &amp;s = <span class="built_in">std</span>::<span class="built_in">cerr</span>) : os(s) &#123;&#125;</span><br><span class="line">        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="function"><span class="keyword">void</span> <span class="title">operator</span><span class="params">()</span> <span class="params">(T *p)</span> <span class="keyword">const</span></span><br><span class="line">        </span>&#123;os &lt;&lt; <span class="string">"delete unique_ptr"</span> &lt;&lt; <span class="built_in">std</span>::endl; <span class="keyword">delete</span> p;&#125;</span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">        <span class="built_in">std</span>::ostream &amp;os;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>34.与类模板的普通函数成员不同，当我们在类模板外定义一个成员模板时，必须同时为类模板和成员模板提供模板参数列表。类模板的参数列表在前，后跟成员自己的模板参数列表。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="comment">// 类的类型参数</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> It&gt; <span class="comment">// 构造函数的类型参数</span></span><br><span class="line">    Blob&lt;T&gt;::Blob(It b, It e) :</span><br><span class="line">        data(<span class="built_in">std</span>::make_shared&lt;<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;T&gt;&gt;(b,e)) &#123; &#125;</span><br></pre></td></tr></table></figure></p>
+<p>35.当模板被使用时才会进行实例化，这一特性意味着，相同的实例可能出现在多个对象文件中。<br>当两个或多个独立编译的源文件使用了相同的模板，并提供了相同的模板参数时，每个文件中就都会有该模板的一个实例。<br>在多个文件中实例化相同的模板的额外开销可能非常严重，在新标准中，我们可以通过显式实例化来避免这种开销。<br>显式实例化的形式是：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// declaration 是一个类或函数声明，其中所有模板参数已被替换为模板实参</span></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">template</span> declaration; <span class="comment">// 实例化声明</span></span><br><span class="line"><span class="keyword">extern</span> declaration;  <span class="comment">// 实例化定义</span></span><br><span class="line">例如：</span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">template</span> <span class="keyword">class</span> Blob&lt;<span class="built_in">string</span>&gt;; <span class="comment">// 声明</span></span><br><span class="line"><span class="function"><span class="keyword">template</span> <span class="keyword">int</span> <span class="title">compare</span> <span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>&amp;, cons <span class="keyword">int</span>&amp;)</span></span>; <span class="comment">// 定义</span></span><br></pre></td></tr></table></figure></p>
+<p>36.当编译器遇到 extern 模板声明时，它不会在本文件中生成实例化代码。因为在程序的其他位置有该实例化的一个非 extern 声明(定义)。对于一个给定的实例化版本，可能有多个 extern 声明，但必须只有一个定义。由于编译器在使用一个模板时自动对其实例化，因此 extern 声明必须出现在任何使用此实例化版本的代码之前。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//application.cc</span></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">template</span> <span class="keyword">class</span> Blob&lt;<span class="built_in">string</span>&gt;;</span><br><span class="line"><span class="function"><span class="keyword">extern</span> <span class="keyword">template</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>&amp;, <span class="keyword">const</span> <span class="keyword">int</span>&amp;)</span></span>;</span><br><span class="line">Blob&lt;<span class="built_in">string</span>&gt; sa1.sa2; <span class="comment">// 实例化会出现在其他地方</span></span><br><span class="line">Blob&lt;<span class="keyword">int</span>&gt; a1 = &#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line">Blob&lt;<span class="keyword">int</span>&gt; a2(a1);</span><br><span class="line"><span class="keyword">int</span> i = compare(a1[<span class="number">0</span>],a2[<span class="number">0</span>]); <span class="comment">//实例化会出现在其他地方</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// templateBuild.cc</span></span><br><span class="line"><span class="function"><span class="keyword">template</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>&amp;, <span class="keyword">const</span> <span class="keyword">int</span>&amp;)</span></span>;</span><br><span class="line"><span class="keyword">template</span> <span class="keyword">class</span> Blob&lt;<span class="built_in">string</span>&gt;;</span><br></pre></td></tr></table></figure></p>
+<p>37.对于每个实例化声明，在程序中某个位置必须有其显式的实例化定义。</p>
+<p>38.在一个类模板的实例化定义中，所用类型必须能用于模板的所有成员函数，包括内联的成员函数。</p>
+<p>39.shared_ptr 和 unique_ptr 一个重要的差异是它们管理所保存的指针策略：前者给予我们共享指针所有权的能力，后者则独占指针。另一个差异是两者允许用户重载默认删除器的方式：前者的删除器类型是运行时确定的，所以可以随时通过使用一种类型的删除器构造一个 shared_ptr，随后使用 reset 赋予这个 shared_ptr 另一个类型的删除器。后者的删除器是编译时确定的，删除器的类型是类类型的一部分，这样删除器可以直接保存在 unique_ptr 对象中，避免了间接调用删除器运行时开销。</p>
+<p>40.在其他类型转换中，能在调用中应用于函数模板的包括如下两项：</p>
+<ul>
+<li>const 转换：可以将一个非 const 对象的引用传递给一个 const 的引用(或指针)形参。</li>
+<li>数组或函数指针转换： 如果函数形参不是引用类型，则可以对数组或函数类型的实参应用正常的指针转换。一个数组实参可以转换为一个指向其首元素的指针。类似的，一个函数实参可以转换为一个该函数类型的指针。</li>
+</ul>
+<p>其他类型转换，如算术转换、派生类向基类的转换以及用户定义的转换，都不能应用于函数模板。</p>
+<p>41.一个模板类型参数可以用作多个函数形参的类型。由于只允许有限的几种类型转换，因此传递给这些形参的实参必须具有相同的类型。如果推断出的类型不匹配，则调用就是错误的。</p>
+<p>42.如果函数实参类型不是模板参数，则对实参进行正常的类型转换。</p>
+<p>43.在某些情况下，编译器无法推断出模板实参的类型，或者我们希望用户控制模板实例化。这个时候我们希望调用者提供一个显式模板实参。</p>
+<p>44.我们提供显式模板实参的方式与定义类模板实例的方式相同，显式模板实参在尖括号中给出，位于函数名之后，实参列表之前。显示模板实参按由左到右的顺序与对应的模板参数匹配；第一个模板实参与第一个模板参数匹配，第二个实参与第二个参数匹配，依次类推。只有尾部(最右)参数的显式模板实参才可以忽略，而且前提是它们可以从函数参数中推断出来。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T1,<span class="keyword">typename</span> T2,<span class="keyword">typename</span> T3&gt;</span><br><span class="line"><span class="function">T1 <span class="title">sum</span><span class="params">(T2,T3)</span></span>;</span><br><span class="line"><span class="comment">//T1 是显式指定的，T2和T3是从函数实参类型推断而来的</span></span><br><span class="line"><span class="keyword">auto</span> val3 = sum&lt;<span class="keyword">long</span> <span class="keyword">long</span>&gt;(i,lng); <span class="comment">//long long sum(int,long)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T1,<span class="keyword">typename</span> T2,<span class="keyword">typename</span> T3&gt;</span><br><span class="line"><span class="function">T3 <span class="title">alternative_sum</span><span class="params">(T2,T1)</span></span>;</span><br><span class="line"><span class="comment">//错误：不断推断T3的类型</span></span><br><span class="line"><span class="keyword">auto</span> val2 = alternative_sum&lt;<span class="keyword">long</span> <span class="keyword">long</span>&gt;(i,lng);</span><br><span class="line"><span class="comment">//正确：显式指定了所有三个参数</span></span><br><span class="line"><span class="keyword">auto</span> val2 = alternative_sum&lt;<span class="keyword">long</span> <span class="keyword">long</span>,<span class="keyword">int</span>,<span class="keyword">long</span>&gt;(i,lng);</span><br></pre></td></tr></table></figure></p>
+<p>45.对于模板类型参数已经显式指定了的函数实参，也进行正常的类型转换。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// &#22914;&#26524;&#19981;&#20808;&#23454;&#20363;&#21270;&#19968;&#20010;&#29305;&#23450;&#27169;&#26495;&#65292;&#37027;&#20040;&#25512;&#27979;&#20004;&#20010;&#21442;&#25968;&#31867;&#22411;&#19968;&#33268;&#10;long lng;&#10;compare(lng,1024);&#10;compare&#60;long&#62;(lng,1024);&#10;compare&#60;int&#62;(lng,1024);&#10;// &#31532;&#19968;&#20010;&#35843;&#29992;&#22240;&#20026;&#20256;&#36882;&#32473; compare &#30340;&#23454;&#21442;&#24517;&#39035;&#20855;&#26377;&#30456;&#21516;&#30340;&#31867;&#22411;&#10;// &#22914;&#26524;&#25105;&#20204;&#26174;&#24335;&#25351;&#23450;&#27169;&#26495;&#31867;&#22411;&#21442;&#25968;&#65292;&#23601;&#21487;&#20197;&#36827;&#34892;&#27491;&#24120;&#31867;&#22411;&#36716;&#25442;&#20102;</span><br></pre></td></tr></table></figure></p>
+<p>46.当我们不知道模板函数返回结果的准确类型，但是知道所需类型是所处理的序列的元素类型时，可以使用尾置返回类型。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> It&gt;</span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">fcn</span><span class="params">(It beg, It end)</span> -&gt; <span class="title">decltype</span><span class="params">(*beg)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> *beg;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 如果是 int 序列，则返回类型是 int&amp;</span></span><br></pre></td></tr></table></figure></p>
+<p>47.当我们无法直接获得所需要的类型时，可以使用标准库的类型转换模板，详见 c++ prime 中文版 5th的p606。</p>
+<p>48.当我们用一个函数模板初始化一个函数指针或为一个函数指针赋值时，编译器使用指针的类型来推断模板实参。</p>
+<p>49.当参数时一个函数模板实例的地址时，程序上下文必须满足：对每个模板参数，能唯一确定其类型或值。例如通过使用显式模板实参来消除函数的二义性。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="function"><span class="keyword">int</span> <span class="title">compare</span><span class="params">(<span class="keyword">const</span> T&amp;, <span class="keyword">const</span> T&amp;)</span></span>;</span><br><span class="line"><span class="comment">// T的模板类型为 int</span></span><br><span class="line"><span class="keyword">int</span> (*pf1) (<span class="keyword">const</span> <span class="keyword">int</span>&amp;, <span class="keyword">const</span> <span class="keyword">int</span>&amp;) = compare;</span><br><span class="line"><span class="comment">//func 的重载版本，每个版本接受一个不同的函数指针类型</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span>(*)</span> <span class="params">(<span class="keyword">const</span> <span class="built_in">string</span>&amp;, <span class="keyword">const</span> <span class="built_in">string</span> &amp;)</span>)</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span>(*)</span> <span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>&amp;, <span class="keyword">const</span> <span class="keyword">int</span>&amp;)</span>)</span>;</span><br><span class="line">func(compare);<span class="comment">// 错误：二义性</span></span><br><span class="line">func(compare&lt;<span class="keyword">int</span>&gt;) <span class="comment">//正确：使用 int 版本</span></span><br></pre></td></tr></table></figure></p>
+<p>50.当一个函数参数是模板类型参数的一个普通(左值)引用时(即，形如 T&amp;)，绑定规则告诉我们，只能传递给它一个左值(如，一个变量或一个返回引用类型的表达式)。<br>实参可以是 const 类型，也可以不是。如果实参是 const ，则 T 将被推断为 const 类型。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="function"><span class="keyword">void</span> <span class="title">f1</span><span class="params">(T&amp;)</span></span>; <span class="comment">// 实参必须是个左值</span></span><br><span class="line"><span class="comment">// i 是一个 int,模板参数类型 T 是 int</span></span><br><span class="line">f1(i);</span><br><span class="line"><span class="comment">// ci 是一个 const Int,模板参数 T 是 const int</span></span><br><span class="line">f1(ci);</span><br><span class="line"><span class="comment">//错误： 传递给一个 &amp; 参数必须是一个左值</span></span><br><span class="line">f1(<span class="number">5</span>);</span><br></pre></td></tr></table></figure></p>
+<p>51.如果一个函数参数类型是 const T&amp;,我们可以传递给它任何类型的实参：一个对象(const 或 非const)、一个临时对象或是一个字面常量值。当函数参数本身是 const 时，T的类型推断的结果不会是一个 const 类型，因为 const 已经是函数参数类型的一部分。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="function"><span class="keyword">void</span> <span class="title">f2</span><span class="params">(<span class="keyword">const</span> T&amp;)</span> <span class="comment">// 可以接受一个右值</span></span><br><span class="line"><span class="comment">// f2 中的参数是 const &amp;，实参中的 const 是无关的</span></span><br><span class="line"><span class="comment">// 在每个调用中，f2的函数参数都被推断为 const int&amp;</span></span><br><span class="line"><span class="comment">// i 是一个 int，模板参数 T 是 int</span></span><br><span class="line"><span class="title">f2</span><span class="params">(i)</span></span>;</span><br><span class="line"><span class="comment">// ci 是一个 const int，但模板参数 T 是 int</span></span><br><span class="line">f2(ci);</span><br><span class="line"><span class="comment">// 一个 const &amp;参数可以绑定到一个右值，T 是 int</span></span><br><span class="line">f2(<span class="number">5</span>);</span><br></pre></td></tr></table></figure></p>
+<p>52.当一个函数参数是一个右值引用(即，形如 T&amp;&amp;)时，我们可以传递给它一个右值。这样的类型推断过程类似普通左值引用函数参数的推断过程。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="function"><span class="keyword">void</span> <span class="title">f3</span><span class="params">(T&amp;&amp;)</span></span><br><span class="line"><span class="comment">// 实参时一个 int 类型的右值，模板参数 T 是 int</span></span><br><span class="line"><span class="title">f3</span><span class="params">(42)</span></span>;</span><br></pre></td></tr></table></figure></p>
+<p>53.在绑定规则中有两个例外</p>
+<ul>
+<li>第一个例外规则影响右值引用参数的推断如何进行。当我们将一个左值(i)传递给函数的右值引用参数，且此右值引用指向模板类型参数(如 T&amp;&amp;)，编译器推断模板类型参数为实参的左值引用类型。因此，当我们调用f3(i)时，编译器推断 T 的类型为 int&amp;，而非 int。</li>
+<li>第二个例外是：如果我们间接创建一个引用的引用，则这些引用会形成折叠。引用折叠只能应用于间接创建的引用的引用，如类型别名或模板参数。<ul>
+<li>X&amp; &amp;、X&amp; &amp;&amp; 和 X&amp;&amp; &amp;都折叠成类型 X&amp;</li>
+<li>类型 X&amp;&amp; &amp;&amp;折叠成 X&amp;&amp;</li>
+</ul>
+</li>
+</ul>
+<p>54.如果一个函数参数是指向模板参数类型的右值引用(如，T&amp;&amp;)，则可以传递给它任意类型的实参。如果将一个左值传递给这样的参数，则函数参数被实例化为一个普通的左值引用(T &amp;)。</p>
+<p>55.在实际中，右值引用通常用于两种情况：模板转发实参或模板被重载。</p>
+<p>56.使用右值引用的函数模板通常是用以下方式重载的：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(T&amp;&amp;)</span></span>;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">const</span> T&amp;)</span></span>;</span><br></pre></td></tr></table></figure></p>
+<p>57.我们可以用 std::move 将一个右值引用绑定到左值上。详见 c++ prime 中文版5th 的p611。</p>
+<p>58.虽然不能隐式地将一个左值转换为右值引用，但我们可以用 static_cast 显式地将一个左值转换为一个右值引用，<br>对于操作右值引用的代码来说，将一个右值引用绑定到一个左值的特性允许它们<strong>截断</strong>左值。但是这种做法不利于我们找到潜在的截断左值的代码。</p>
+<p>59.某些函数需要将其一个或多个实参连同类型不变地转发给其他函数。在此情况下，我们需要保持被转发实参的所有性质，包括实参类型是否是 const 的以及实参是左值还是右值。</p>
+<p>60.如果一个函数参数是指向模板类型参数的右值引用(如 T&amp;&amp;)，它对应的实参的 const 属性和左值 / 右值属性得到保持。</p>
+<p>61.我们可以使用一个名为 std::forward 的新标准库设置来转发参数，它能保持原始实参的类型，类似move，forward 定义在头文件 utility 中。与 move 不同，forward 必须通过显式模板实参来调用。forward 返回该显式实参类型的右值引用。即 T&amp;&amp;。</p>
+<p>62.通常情况下，我们使用 forward 传递哪些定义为模板类型参数的右值引用的函数参数。通过返回类型上的引用折叠,forward 可以保持给定实参的左值或右值属性。</p>
+<p>63.当用于一个指向模板参数类型的右值引用函数参数(T &amp;&amp;)时，forward 会保护实参类型的所有细节。</p>
+<p>64.函数模板的匹配规则会收到以下方面影响：</p>
+<ul>
+<li>对于一个调用，其候选函数包括所有模板实参推断成功的函数模板实例。</li>
+<li>候选的函数模板总是可以行的，因为模板实参推断会排除任何不可行的模板。</li>
+<li>与往常一样，可行函数(模板与非模板)按类型转换(如果对此调用需要的话)来排序。当然，函数模板调用的类型转换是有限的。</li>
+<li><p>如果恰好有一个函数提供比任何其他函数都更好的匹配，则选择此函数。但是，如果有多个函数提供同样好的匹配，则：</p>
+<pre><code>-<span class="ruby"> 如果同样好的函数中只有一个是非模板函数，则选择此函数。
+</span>-<span class="ruby"> 如果同样好的函数中没有非模板函数，而有多个函数模板，且其中一个模板比其他模板更特例化，则选择此模板
+</span>-<span class="ruby"> 否则，此调用有歧义。</span>
+</code></pre></li>
+</ul>
+<p>65.正确定义一组重载的函数模板需要对类型间的关系及模板函数允许的有限的实参类型转换有深刻理解。</p>
+<p>66.在定义任何函数之前，记得声明所有重载的函数版本。这样就不必担心编译器由于未遇到你希望调用的函数而实例化一个并非你所需的版本。</p>
+<p>67.一个可变参数模板就是一个接受可变数目参数的模板函数或模板类。可变数目的参数被称为参数包。存在两种参数包：模板参数包，表示零个或多个模板参数；函数参数包，表示零个或多个函数参数。</p>
+<p>68.我们用一个省略号来指出一个模板参数或函数参数表示一个包。在一个模板参数列表中，class… 或 typename… 指出接下来的参数表示零个或多个类型的列表；<br>一个类型名后面跟一个省略号表示零个或多个给定类型的非类型参数的列表。在函数参数列表中，如果一个参数的类型是一个模板参数包，则此参数也是一个函数参数包。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Args 是一个模板参数包，</span></span><br><span class="line"><span class="comment">//rest 是一个类型名后面跟一个省略号表示零个或多个给定类型的非类型参数的列表。</span></span><br><span class="line"><span class="comment">//在函数参数列表中，如果一个参数的类型是一个模板参数包，则此参数也是一个函数参数包。</span></span><br><span class="line"><span class="comment">//Args 表示零个或多个模板类型参数</span></span><br><span class="line"><span class="comment">//rest 表示零个或多个函数参数</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T,<span class="keyword">typename</span>... Args&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">(<span class="keyword">const</span> T &amp;t,<span class="keyword">const</span> Args... rest)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>; <span class="keyword">double</span> d = <span class="number">3.14</span>; <span class="built_in">string</span> s = <span class="string">"hello"</span>;</span><br><span class="line">foo(i,s,<span class="number">42</span>,d);</span><br><span class="line"><span class="comment">// void foo(const int&amp;,const string&amp;,const int&amp;,const double&amp;);</span></span><br><span class="line">foo(s,<span class="number">42</span>,<span class="string">"hi"</span>);</span><br><span class="line"><span class="comment">// void foo(const string&amp;, const int&amp;,const char[3]);</span></span><br><span class="line">foo(d,s);</span><br><span class="line"><span class="comment">// void foo(const double&amp;,const string&amp;);</span></span><br><span class="line">foo(<span class="string">"hi"</span>);</span><br><span class="line"><span class="comment">// void foo(const char[3]&amp;);</span></span><br></pre></td></tr></table></figure></p>
+<p>69.当我们需要直到包中有多少元素时，可以使用 sizeof… 运算符，类似 sizeof ，sizeof… 也返回一个常量表达式，而且不会对实参求值。</p>
+<p>70.可变参数函数通常时递归的，第一步调用处理包中的第一个实参，然后用剩余实参调用自己。<br>因此，当定义可变参数版本的 print 时，非可变参数版本的声明必须在作用域中，否则可变参数版本会无限递归。</p>
+<p>71.对于一个参数包，除了获取其大小外，我们能对它做的唯一的事情就是扩展。当扩展一个包时，我们还要提供用于每个扩展元素的模式，该模式将会应用于包中每个元素。</p>
+<p>72.关于转发参数包详见 c++ prime 5th 中文版的p624。</p>
+<p>73.在某些模板的定义对特定类型时不适合的：通用定义可能编译失败或做的不好。当我们不能使用模板版本时，可以定义类或函数模板的一个特例化版本。  一个特例化版本就是模板的一个独立的定义，在其中一个或多个模板参数被指定为特定的类型。当我们特例化一个函数模板时，必须为原模板中的每个模板参数都提供实参。为了指出我们正在实例化一个模板，应该使用关键 template 后跟一个空尖括号对 &lt;&gt; ，来指出我们将为原模板的所有模板参数提供实参：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//第一个版本</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="function"><span class="keyword">int</span> <span class="title">compare</span><span class="params">(<span class="keyword">const</span> T&amp;,<span class="keyword">const</span> T&amp;)</span></span>;</span><br><span class="line"><span class="comment">// 特例化版本</span></span><br><span class="line"><span class="keyword">template</span>&lt;&gt;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">compare</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* <span class="keyword">const</span> &amp;p1,<span class="keyword">const</span> <span class="keyword">char</span>* <span class="keyword">const</span> &amp;p2)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">strcmp</span>(p1,p1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>74.特例化的本质是实例化一个模板，而非重载它。因此，特例化不影响函数匹配。</p>
+<p>75.为了特例化一个模板，原模板的声明必须在作用域中。而且，在任何使用模板实例的代码之前，特例化版本的声明也必须在作用域中。模板及其特例化版本应该声明在同一个头文件中。所有同名版本的声明放在前面，然后是这些模板的特例化版本。</p>
+<p>76.我们只能部分特例化类模板，而不能部分特例化函数模板。一个类模板的部分特例化本身是一个模板，使用它时用户还必须为那些在特例化版本中未指定的模板参数提供实参。</p>
+<p>77.我们可以只特例化特定成员函数而不是特例化整个模板。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keyword">struct</span> Foo </span><br><span class="line">&#123;</span><br><span class="line">    Foo(<span class="keyword">const</span> T &amp;t = T()) : mem(t) &#123; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Bar</span><span class="params">()</span> </span>&#123;<span class="comment">/* ... */</span>&#125;</span><br><span class="line">    T mem;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">template</span> &lt;&gt; </span><br><span class="line"><span class="keyword">void</span> Foo&lt;<span class="keyword">int</span>&gt;::Bar()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Foo&lt;<span class="built_in">string</span>&gt; fs;</span><br><span class="line"><span class="comment">// 实例化Foo&lt;string&gt;::Foo()</span></span><br><span class="line">fs.Bar();</span><br><span class="line"><span class="comment">// 实例化Foo&lt;string&gt;::Bar</span></span><br><span class="line">Foo&lt;<span class="keyword">int</span>&gt; fi;</span><br><span class="line"><span class="comment">//实例化Foo&lt;int&gt;::Foo()</span></span><br><span class="line">fi.Bar();</span><br><span class="line"><span class="comment">// 调用特例化版本 Foo&lt;int&gt;::Bar()</span></span><br><span class="line"><span class="comment">//当我们用 int 之外的任何类型使用 Foo 时，其成员像往常一样进行实例化</span></span><br><span class="line"><span class="comment">//当我们用 int 使用 Foo 时，Bar 之外的成员像往前一样进行实例化。</span></span><br><span class="line"><span class="comment">//如果我们使用 Foo&lt;int&gt;的成员 Bar ，则会使用我们定义的特例化版本</span></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/c/" rel="tag">#c++</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/24/cpp-prime-chap-8-12/" rel="next" title="Note in c++ prime 5th (chap8-12)">
+                <i class="fa fa-chevron-left"></i> Note in c++ prime 5th (chap8-12)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/02/15/cpp-prime-chap-13-16/"
+           data-title="Note in c++ prime 5th (chap13-16)" data-url="https://luengzeegin.github.io/2017/02/15/cpp-prime-chap-13-16/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/11225229?v=3&u=b3c447bfe8d0842bfc56483c05540fe69ebed1f6&s=140"
+               alt="Lueng Zeegin" />
+          <p class="site-author-name" itemprop="name">Lueng Zeegin</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/luengzeegin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/liang-zi-jian-48" target="_blank" title="ZhiHu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  ZhiHu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#拷贝控制"><span class="nav-number">1.</span> <span class="nav-text">拷贝控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重载运算与类型转换"><span class="nav-number">2.</span> <span class="nav-text">重载运算与类型转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面向对象程序设计"><span class="nav-number">3.</span> <span class="nav-text">面向对象程序设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模板与泛型编程"><span class="nav-number">4.</span> <span class="nav-text">模板与泛型编程</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lueng Zeegin</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"luengzeegin"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

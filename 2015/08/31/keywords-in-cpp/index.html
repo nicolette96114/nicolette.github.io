@@ -1,0 +1,766 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="c++," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="备忘录" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="前言人呐，总是找个地方记一下笔记学习才有动力啊，所以我就把《C++ prime》
+里面的 c++ 概念，都摘录下来了，方便自己有时候查看，想想还是不错的，
+除此以外， 我还把一些需要注意的地方和要点也都记录下来， 不过为了版面设计，我把它放在另一篇博文
+《something important in cpp》里面了，
+如果有什么不对的地方，欢迎大家在下面评论。
+毕竟这里只是写出鄙人短浅的观点，还望">
+<meta property="og:type" content="article">
+<meta property="og:title" content="keywords in cpp(part one)">
+<meta property="og:url" content="https://luengzeegin.github.io/2015/08/31/keywords-in-cpp/index.html">
+<meta property="og:site_name" content="备忘录">
+<meta property="og:description" content="前言人呐，总是找个地方记一下笔记学习才有动力啊，所以我就把《C++ prime》
+里面的 c++ 概念，都摘录下来了，方便自己有时候查看，想想还是不错的，
+除此以外， 我还把一些需要注意的地方和要点也都记录下来， 不过为了版面设计，我把它放在另一篇博文
+《something important in cpp》里面了，
+如果有什么不对的地方，欢迎大家在下面评论。
+毕竟这里只是写出鄙人短浅的观点，还望">
+<meta property="og:updated_time" content="2016-02-22T11:30:39.743Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="keywords in cpp(part one)">
+<meta name="twitter:description" content="前言人呐，总是找个地方记一下笔记学习才有动力啊，所以我就把《C++ prime》
+里面的 c++ 概念，都摘录下来了，方便自己有时候查看，想想还是不错的，
+除此以外， 我还把一些需要注意的地方和要点也都记录下来， 不过为了版面设计，我把它放在另一篇博文
+《something important in cpp》里面了，
+如果有什么不对的地方，欢迎大家在下面评论。
+毕竟这里只是写出鄙人短浅的观点，还望">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://luengzeegin.github.io/2015/08/31/keywords-in-cpp/"/>
+
+  <title> keywords in cpp(part one) | 备忘录 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">备忘录</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">苟利国家生死以，岂因祸福避趋之。</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '5KNqcS_qiVtdSPs-g3YH','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                keywords in cpp(part one)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-08-31T16:49:40+08:00" content="2015-08-31">
+              2015-08-31
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/08/31/keywords-in-cpp/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/31/keywords-in-cpp/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言">前言</h1><pre><code><span class="comment">人呐，总是找个地方记一下笔记学习才有动力啊，所以我就把《C</span><span class="literal">+</span><span class="literal">+</span> <span class="comment">prime》</span>
+<span class="comment">里面的</span> <span class="comment">c</span><span class="literal">+</span><span class="literal">+</span> <span class="comment">概念，都摘录下来了，方便自己有时候查看，想想还是不错的，</span>
+<span class="comment">除此以外，</span> <span class="comment">我还把一些需要注意的地方和要点也都记录下来，</span> <span class="comment">不过为了版面设计，我把它放在另一篇博文</span>
+<span class="comment">《something</span> <span class="comment">important</span> <span class="comment">in</span> <span class="comment">cpp》里面了，</span>
+<span class="comment">如果有什么不对的地方，欢迎大家在下面评论。</span>
+<span class="comment">毕竟这里只是写出鄙人短浅的观点，还望抛砖引玉。</span>
+</code></pre><a id="more"></a>
+<h3 id="对象：">对象：</h3><pre><code>具有某种数据类型的内存空间，有一个说法是将对象以有没有命名来区分，
+命了名的对象称为变量，没有命名的就称为对象。
+</code></pre><h3 id="引用：">引用：</h3><pre><code>为变量起了另一个名字，通过声明符写成&amp;<span class="built_in">i</span>的形式来定义引用类型，
+其中<span class="built_in">i</span>是声明的变量名。引用的时候必须被初始化，一旦完成初始化之后，
+引用无法重新绑定另一个变量。实际上，完成初始化之后，
+引用与它绑定的变量是等价的。函数实参使用引用，
+其实有个好处就是把形参与实参联系起来，中间少了一个创建副本的过程。
+</code></pre><h3 id="常量引用：">常量引用：</h3><pre><code>所谓常量引用是对<span class="keyword">const</span>的引用，并且常量引用仅对引用可参与的操作进行了限定。
+常量引用可以绑定非常量的对象、对面值，甚至是一个表达式，
+但是不能通过引用来改变对象的值。注意，不能让一个非常量引用指向一个常量对象。
+</code></pre><h3 id="常量表达式">常量表达式</h3><pre><code>值不会改变并且在编译过程中就能得到计算结果的表达式。
+</code></pre><h3 id="constexpr类型">constexpr类型</h3><pre><code>该类型声明的变量一定是一个常量，因此必须要用一个常量来进行初始化。
+</code></pre><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> *p1 相当于 <span class="keyword">int</span> *<span class="keyword">const</span> p1</span><br></pre></td></tr></table></figure>
+<h2 id="auto类型说明符">auto类型说明符</h2><pre><code><span class="keyword">auto</span>说明符能让编译器通过初始值来推算变量的类型。
+例如：
+</code></pre><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> add = bar + var </span><br><span class="line"><span class="comment">//如果两个数都为double那么add就是double型。</span></span><br></pre></td></tr></table></figure>
+<h3 id="容器vector">容器vector</h3><pre><code>相同类型对象的集合，同时集合中每个对象都有和它一一对应的索引，用于访问对象。注意这里并不包括引用。
+</code></pre><h3 id="模板template">模板template</h3><pre><code>模板本身不是类或者函数，不过可以将模板看作为编译器生成的类或者函数
+编写的一份声明，编译器根据模板创建类或者的过程称为实例化。
+</code></pre><h3 id="范围for">范围for</h3><pre><code class="cpp"><span class="keyword">for</span>(declaration:expression)
+    statement
+</code></pre>
+<pre><code> 1<span class="class">.expresstion</span>是一个给定的序列，<span class="tag">declaration</span>定义一个用于遍历序列的元素，
+每次迭代之后，这个元素都会被初始化为序列的下一个元素。
+
+ 2.如果需要对序列中的元素执行写操作的时候，循环变量必须声明成引用类型。
+</code></pre><h3 id="重载运算符">重载运算符</h3><pre><code>当运算符作用于类类的运算对象时，用户可以自行定义其含义，
+但是运算对象的个数、运算符的优先级和结合律都是没有办法改变，
+意思就是说二元运算符的操作数就是两个并不能改变为一个。
+</code></pre><h3 id="左值和右值">左值和右值</h3><pre><code>一个对象被用作右值的时候，用的是对象的值<span class="comment">(内容)</span>；当对象被用作左值的时候，用的是对象在内存中的位置。
+</code></pre><h3 id="try语句块和异常处理">try语句块和异常处理</h3><pre><code> <span class="keyword">throw</span>表达式包含关键字和一个表达式一个分号
+    <span class="keyword">throw</span> <span class="keyword">error</span>(<span class="string">"Data error"</span>);
+     *返回一个<span class="built_in">string</span>类,异常类型中的what成员接受这个<span class="built_in">string</span>类，
+     然后可以通过输出what成员函数来输出文本信息。
+<span class="keyword">try</span>表达式包括<span class="keyword">catch</span>子句和异常对象的声明和处理块。
+</code></pre><pre><code class="cpp"><span class="keyword">try</span>
+{ <span class="keyword">if</span>(……)
+    <span class="keyword">throw</span> runtime_error( ……)
+}
+<span class="keyword">catch</span> (runtime_error 异常对象名)
+{
+    <span class="built_in">cout</span> &lt;&lt; 异常对象名.what();
+    <span class="keyword">do</span> sth.
+}
+</code></pre>
+<h3 id="引用传递">引用传递</h3><pre><code>当形参是引用类型的时候，引用形参也是它绑定的对象的别名。
+</code></pre><h3 id="尾置返回类型">尾置返回类型</h3><pre><code class="cpp"><span class="function"><span class="keyword">auto</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span> i)</span> -&gt; <span class="title">int</span><span class="params">(*)</span>[10]</span>
+</code></pre>
+<pre><code>用<span class="attribute">auto</span>代替原来返回类型，然后再形参列表后面用 <span class="string">'-&gt;'</span> 加上真正的返回类型。
+</code></pre><h3 id="函数重载">函数重载</h3><pre><code>如果同一个作用域内的几个函数名字相同，但形参列表不同，我们称为重载。不过<span class="keyword">main</span>函数不能重载。
+</code></pre><h3 id="构造函数">构造函数</h3><pre><code><span class="number">1.</span>用于初始化类的函数，至少有一个。多个构造函数之间类似函数的重载， 在参数数量与参数类型上有所区别。
+
+<span class="number">2.</span>构造函数的名字要与类名相同。
+
+<span class="number">3.</span>如果我们需要编译器提供默认构造函数，我们在参数列表后面写上<span class="string">" = default "</span>。即：类名<span class="comment">()</span> = default；
+
+<span class="number">4.</span>如果我们需要自己定义构造函数，如 ： 类名<span class="comment">( 参数列表 )</span> 冒号 构造函数初始化列表 { 函数体 } 没有分号
+    例：
+</code></pre><pre><code class="cpp">Sales_data(<span class="keyword">const</span> <span class="built_in">std</span>：：<span class="built_in">string</span> &amp;s) : bookNo(s), units_sold(<span class="number">0</span>) , revenus(<span class="number">0</span>） {　｝;
+<span class="comment">// 将字符串ｓ用来初始化bookNo , 用0初始化 units_solds revenus</span>
+</code></pre>
+<h3 id="委托构造函数">委托构造函数</h3><pre><code>1.委托构造函数使用它所属类的其他构造函数执行它自己的初始化过程，
+它的形式形如：
+类名（参数列表）冒号 所需构造函数 （所需构造函数的参数列表） <span class="rules">{ }</span> 没有分号。
+</code></pre><h3 id="可变数据成员">可变数据成员</h3><pre><code>当我们需要在一个<span class="keyword">const</span>成员函数中有一个可改变的数据成员的时候
+如统计这个函数运行了多少次，就可以用<span class="keyword">mutable</span>关键字声明这个数据成员。
+</code></pre><h3 id="explicit关键字">explicit关键字</h3><pre><code><span class="keyword">explicit</span>关键字主要用在修饰构造函数、复制构造函数。
+在函数参数允许隐式类型转换的时候，我们可以使用 <span class="keyword">explicit</span> 来进行阻止。
+</code></pre><h3 id="聚合类">聚合类</h3><pre><code>所有成员都是 <span class="keyword">public</span>，没有定义任何构造函数，没有类内初始值，没有基类，也没有 <span class="keyword">virtual</span> 函数。
+</code></pre><h3 id="类的静态成员">类的静态成员</h3><pre><code>当类需要一个只与一些成员与类本身直接相关、被所有类对象共享，
+而不是与类的各个对象保持关联的对象时，如银行的利率，班级的人数，
+我们可以使用 <span class="keyword">static</span> 声明这个成员。
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/c/" rel="tag">#c++</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/08/31/something-important-in-cpp/" rel="next" title="Note in c++ prime 5th (chap1-7)">
+                <i class="fa fa-chevron-left"></i> Note in c++ prime 5th (chap1-7)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/24/cpp-prime-chap-8-12/" rel="prev" title="Note in c++ prime 5th (chap8-12)">
+                Note in c++ prime 5th (chap8-12) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/08/31/keywords-in-cpp/"
+           data-title="keywords in cpp(part one)" data-url="https://luengzeegin.github.io/2015/08/31/keywords-in-cpp/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/11225229?v=3&u=b3c447bfe8d0842bfc56483c05540fe69ebed1f6&s=140"
+               alt="Lueng Zeegin" />
+          <p class="site-author-name" itemprop="name">Lueng Zeegin</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/luengzeegin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/liang-zi-jian-48" target="_blank" title="ZhiHu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  ZhiHu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对象："><span class="nav-number">1.0.1.</span> <span class="nav-text">对象：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引用："><span class="nav-number">1.0.2.</span> <span class="nav-text">引用：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常量引用："><span class="nav-number">1.0.3.</span> <span class="nav-text">常量引用：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常量表达式"><span class="nav-number">1.0.4.</span> <span class="nav-text">常量表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#constexpr类型"><span class="nav-number">1.0.5.</span> <span class="nav-text">constexpr类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#auto类型说明符"><span class="nav-number">1.1.</span> <span class="nav-text">auto类型说明符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#容器vector"><span class="nav-number">1.1.1.</span> <span class="nav-text">容器vector</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模板template"><span class="nav-number">1.1.2.</span> <span class="nav-text">模板template</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#范围for"><span class="nav-number">1.1.3.</span> <span class="nav-text">范围for</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重载运算符"><span class="nav-number">1.1.4.</span> <span class="nav-text">重载运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#左值和右值"><span class="nav-number">1.1.5.</span> <span class="nav-text">左值和右值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#try语句块和异常处理"><span class="nav-number">1.1.6.</span> <span class="nav-text">try语句块和异常处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引用传递"><span class="nav-number">1.1.7.</span> <span class="nav-text">引用传递</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#尾置返回类型"><span class="nav-number">1.1.8.</span> <span class="nav-text">尾置返回类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数重载"><span class="nav-number">1.1.9.</span> <span class="nav-text">函数重载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造函数"><span class="nav-number">1.1.10.</span> <span class="nav-text">构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#委托构造函数"><span class="nav-number">1.1.11.</span> <span class="nav-text">委托构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可变数据成员"><span class="nav-number">1.1.12.</span> <span class="nav-text">可变数据成员</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#explicit关键字"><span class="nav-number">1.1.13.</span> <span class="nav-text">explicit关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聚合类"><span class="nav-number">1.1.14.</span> <span class="nav-text">聚合类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类的静态成员"><span class="nav-number">1.1.15.</span> <span class="nav-text">类的静态成员</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lueng Zeegin</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"luengzeegin"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
