@@ -5,7 +5,7 @@
   <subtitle><![CDATA[苟利国家生死以，岂因祸福避趋之。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="https://luengzeegin.github.io/"/>
-  <updated>2017-02-28T08:27:40.180Z</updated>
+  <updated>2017-07-14T11:30:06.016Z</updated>
   <id>https://luengzeegin.github.io//</id>
   
   <author>
@@ -14,6 +14,130 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[深度探索C++对象模型、E、ME笔记]]></title>
+    <link href="https://luengzeegin.github.io/2017/07/14/inside%20obejct%20model_e_me/"/>
+    <id>https://luengzeegin.github.io/2017/07/14/inside obejct model_e_me/</id>
+    <published>2017-07-13T16:00:00.000Z</published>
+    <updated>2017-07-14T11:30:06.016Z</updated>
+    <content type="html"><![CDATA[<h2 id="深度探索C++对象模型">深度探索C++对象模型</h2><p>1.<em>struct</em> 和 <em>class</em>的一点点区别 p16</p>
+<p>2.支持多态的形式 p25</p>
+<p>3.一个类对象的内存 p27<br><a id="more"></a><br>4.* 和 &amp; 支持多态的原因 p33</p>
+<p>5.合成构造函数的条件 p47</p>
+<ul>
+<li><p>没有 default 构造函数</p>
+<ul>
+<li>基类有构造函数</li>
+<li>类成员有构造函数</li>
+</ul>
+</li>
+<li><p>有 default ctor 并且有 user code 时，先扩展已有的 ctor，再插入 user code ，再合成默认构造函数</p>
+</li>
+<li><p>带虚基类的类</p>
+</li>
+</ul>
+<p>6.有效的 copy ctor P53</p>
+<p>7.NRV P67</p>
+<p>8.copy ctor 的讨论 P72</p>
+<p>9.初始值列表 P77</p>
+<p>10.类大小的影响因素、空 class 有 1byte P84</p>
+<p>11.empty virtual base class 的优化 P86</p>
+<p>12.data member 的存储 P94</p>
+<p>13.单一继承对象布局、为什么要 pading P105</p>
+<p>14.多重继承数据布局 P115</p>
+<p>15.虚拟继承数据布局 P121 P123</p>
+<p>16.指向 data member 的指针 offset P132</p>
+<p>17.区分没有指向任何 data member 的指针与指向第一个 data member 的指针 P130 P131</p>
+<p>18.member 各种调用方式</p>
+<ul>
+<li>name mangling P144</li>
+<li>static member func P149</li>
+</ul>
+<p>19.c++ 多态 P153</p>
+<p>20.vtb的实现 P155</p>
+<p>21.单一继承的 vtb 布局 P157</p>
+<p>22.trunk 技术 P163</p>
+<p>23.多重继承的 vtb 布局 P165</p>
+<p>24.调整指针 offset P166</p>
+<p>25.虚拟继承的 vtb 布局 P169</p>
+<p>26.指向 member func 的指针 P175</p>
+<p>27.对 virtual member func 取址得索引值 P176</p>
+<p>28.函数指针的 evaluate P178</p>
+<p>29.inline 的作用以及与宏的区别 P183</p>
+<p>30.处理 inline 的两个阶段 P184</p>
+<p>31.inline 的形参绑定 P185</p>
+<p>32.inline 局部变量的展开 P187</p>
+<p>33.纯虚函数的作用 P193</p>
+<p>34.Plain OI’Data P196</p>
+<p>35.global object / heap object / local object P197</p>
+<p>36.explicit initialzation list P200</p>
+<p>37.vfunc 的膨胀作用 P203</p>
+<p>38.ctor 扩展操作 P206</p>
+<p>39.虚拟继承基类 ctor 的 trick(参数) P210</p>
+<p>40.vptr 初始化操作 P216、P218</p>
+<p>41.不表现 bitwise copy 语意的 ctor P220</p>
+<p>42.派生类初始化基类 ctor P223</p>
+<p>43.析构函数 P231</p>
+<p>44.dtor 的扩展顺序 P234</p>
+<p>45.全局对象的 munch 策略 P243、P245</p>
+<p>46.局部静态对象 P247</p>
+<p>47.new 的运行步骤 P254</p>
+<p>48.new 返回 1Byte 内存 P257</p>
+<p>49.placement new P264</p>
+<p>50.copy ctor 和 assignment P269</p>
+<p>51.临时对象的生命周期 P271、P273</p>
+<p>52.临时对象的优化 P277</p>
+<p>53.template 的类型决议 P290</p>
+<p>54.exception 运行过程 P298、P303、P305</p>
+<p>55.new 抛出 exception P301</p>
+<p>56.type_info P312、P315</p>
+<p>57.down_cast P309</p>
+<p>58.down_cast 的负担 P310</p>
+<hr>
+<h2 id="Effective_C++">Effective C++</h2><p>1.enum hack P15 </p>
+<p>2.宏展开 P16</p>
+<p>3.运算符函数 const 的原因 P19</p>
+<p>4.const 的意义 P21、P23</p>
+<p>5.编译单元的 non-local-static 初始化 P30</p>
+<p>6.copy ctor 函数与 copy assignment 区别 P60</p>
+<p>7.RAII P66</p>
+<p>8.数据的封装 P99</p>
+<p>9.this 指针的 trick P121</p>
+<p>10.copy and swap P132</p>
+<p>11.Pimpl P142</p>
+<p>12.纯虚函数的特点 P162</p>
+<p>13.NVI、模板设计模式、策略模式 P170</p>
+<p>14.动态绑定与静态绑定 P180</p>
+<p>15.显式接口与隐式接口 P200</p>
+<hr>
+<h2 id="More_Effective">More Effective</h2><p>1.const 时 reference 与 pointer 的区别</p>
+<p>2.dctor 不会析构半成品 P53</p>
+<p>3.by pointer、ref、name catch exception P68</p>
+<p>4.虚函数、多重继承、虚拟基类、RTTI的主要成本 P121</p>
+<p>5.单例模型 P132</p>
+<p>6.unique_ptr 条款28</p>
+<p>7.share_ptr 条款29</p>
+<p>8.什么时候使用RC P212</p>
+<p>9.double-dispatching 条款31</p>
+<ul>
+<li>如何处理多态</li>
+<li>如何维护</li>
+</ul>
+<p>10.如何设计一个 class P257</p>
+<p>11.继承类中赋值语句的处理 P264</p>
+<p>12.有用的抽象 P267</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="深度探索C++对象模型">深度探索C++对象模型</h2><p>1.<em>struct</em> 和 <em>class</em>的一点点区别 p16</p>
+<p>2.支持多态的形式 p25</p>
+<p>3.一个类对象的内存 p27<br>]]>
+    
+    </summary>
+    
+      <category term="c++" scheme="https://luengzeegin.github.io/tags/c/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Note in c++ prime 5th (chap13-16)]]></title>

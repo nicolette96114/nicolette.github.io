@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="c++," />
 
 
 
@@ -86,15 +86,22 @@
 
 
 
-<meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="备忘录">
-<meta property="og:url" content="https://luengzeegin.github.io/archives/2015/06/index.html">
+<meta name="description" content="深度探索C++对象模型1.struct 和 class的一点点区别 p16
+2.支持多态的形式 p25
+3.一个类对象的内存 p27">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度探索C++对象模型、E、ME笔记">
+<meta property="og:url" content="https://luengzeegin.github.io/2017/07/14/inside obejct model_e_me/index.html">
 <meta property="og:site_name" content="备忘录">
-<meta property="og:description">
+<meta property="og:description" content="深度探索C++对象模型1.struct 和 class的一点点区别 p16
+2.支持多态的形式 p25
+3.一个类对象的内存 p27">
+<meta property="og:updated_time" content="2017-07-14T11:30:06.016Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="备忘录">
-<meta name="twitter:description">
+<meta name="twitter:title" content="深度探索C++对象模型、E、ME笔记">
+<meta name="twitter:description" content="深度探索C++对象模型1.struct 和 class的一点点区别 p16
+2.支持多态的形式 p25
+3.一个类对象的内存 p27">
 
 
 
@@ -115,9 +122,9 @@
 
 
 
-  <link rel="canonical" href="https://luengzeegin.github.io/archives/2015/06/"/>
+  <link rel="canonical" href="https://luengzeegin.github.io/2017/07/14/inside obejct model_e_me/"/>
 
-  <title> 归档 | 备忘录 </title>
+  <title> 深度探索C++对象模型、E、ME笔记 | 备忘录 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -138,7 +145,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  page-archive  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -256,103 +263,234 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
-
-    <span class="archive-page-counter">
-      
-      
-      
-        
-      
-      嗯..! 目前共计 7 篇日志。 继续努力。
-    </span>
-
+  <div id="posts" class="posts-expand">
     
-
-      
-      
-      
-
-      
-        
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2015">2015</h2>
-        </div>
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2015/06/06/cin-cout/" itemprop="url">
-              
-                <span itemprop="name">输入和输出对象</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2015-06-06T10:49:00+08:00"
-              content="2015-06-06" >
-          06-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2015/06/06/my-new-post/" itemprop="url">
-              
-                <span itemprop="name">如何选择类型</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2015-06-06T10:19:33+08:00"
-              content="2015-06-06" >
-          06-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-  </section>
 
   
+  
 
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                深度探索C++对象模型、E、ME笔记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-07-14T00:00:00+08:00" content="2017-07-14">
+              2017-07-14
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/07/14/inside obejct model_e_me/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/07/14/inside obejct model_e_me/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="深度探索C++对象模型">深度探索C++对象模型</h2><p>1.<em>struct</em> 和 <em>class</em>的一点点区别 p16</p>
+<p>2.支持多态的形式 p25</p>
+<p>3.一个类对象的内存 p27<br><a id="more"></a><br>4.* 和 &amp; 支持多态的原因 p33</p>
+<p>5.合成构造函数的条件 p47</p>
+<ul>
+<li><p>没有 default 构造函数</p>
+<ul>
+<li>基类有构造函数</li>
+<li>类成员有构造函数</li>
+</ul>
+</li>
+<li><p>有 default ctor 并且有 user code 时，先扩展已有的 ctor，再插入 user code ，再合成默认构造函数</p>
+</li>
+<li><p>带虚基类的类</p>
+</li>
+</ul>
+<p>6.有效的 copy ctor P53</p>
+<p>7.NRV P67</p>
+<p>8.copy ctor 的讨论 P72</p>
+<p>9.初始值列表 P77</p>
+<p>10.类大小的影响因素、空 class 有 1byte P84</p>
+<p>11.empty virtual base class 的优化 P86</p>
+<p>12.data member 的存储 P94</p>
+<p>13.单一继承对象布局、为什么要 pading P105</p>
+<p>14.多重继承数据布局 P115</p>
+<p>15.虚拟继承数据布局 P121 P123</p>
+<p>16.指向 data member 的指针 offset P132</p>
+<p>17.区分没有指向任何 data member 的指针与指向第一个 data member 的指针 P130 P131</p>
+<p>18.member 各种调用方式</p>
+<ul>
+<li>name mangling P144</li>
+<li>static member func P149</li>
+</ul>
+<p>19.c++ 多态 P153</p>
+<p>20.vtb的实现 P155</p>
+<p>21.单一继承的 vtb 布局 P157</p>
+<p>22.trunk 技术 P163</p>
+<p>23.多重继承的 vtb 布局 P165</p>
+<p>24.调整指针 offset P166</p>
+<p>25.虚拟继承的 vtb 布局 P169</p>
+<p>26.指向 member func 的指针 P175</p>
+<p>27.对 virtual member func 取址得索引值 P176</p>
+<p>28.函数指针的 evaluate P178</p>
+<p>29.inline 的作用以及与宏的区别 P183</p>
+<p>30.处理 inline 的两个阶段 P184</p>
+<p>31.inline 的形参绑定 P185</p>
+<p>32.inline 局部变量的展开 P187</p>
+<p>33.纯虚函数的作用 P193</p>
+<p>34.Plain OI’Data P196</p>
+<p>35.global object / heap object / local object P197</p>
+<p>36.explicit initialzation list P200</p>
+<p>37.vfunc 的膨胀作用 P203</p>
+<p>38.ctor 扩展操作 P206</p>
+<p>39.虚拟继承基类 ctor 的 trick(参数) P210</p>
+<p>40.vptr 初始化操作 P216、P218</p>
+<p>41.不表现 bitwise copy 语意的 ctor P220</p>
+<p>42.派生类初始化基类 ctor P223</p>
+<p>43.析构函数 P231</p>
+<p>44.dtor 的扩展顺序 P234</p>
+<p>45.全局对象的 munch 策略 P243、P245</p>
+<p>46.局部静态对象 P247</p>
+<p>47.new 的运行步骤 P254</p>
+<p>48.new 返回 1Byte 内存 P257</p>
+<p>49.placement new P264</p>
+<p>50.copy ctor 和 assignment P269</p>
+<p>51.临时对象的生命周期 P271、P273</p>
+<p>52.临时对象的优化 P277</p>
+<p>53.template 的类型决议 P290</p>
+<p>54.exception 运行过程 P298、P303、P305</p>
+<p>55.new 抛出 exception P301</p>
+<p>56.type_info P312、P315</p>
+<p>57.down_cast P309</p>
+<p>58.down_cast 的负担 P310</p>
+<hr>
+<h2 id="Effective_C++">Effective C++</h2><p>1.enum hack P15 </p>
+<p>2.宏展开 P16</p>
+<p>3.运算符函数 const 的原因 P19</p>
+<p>4.const 的意义 P21、P23</p>
+<p>5.编译单元的 non-local-static 初始化 P30</p>
+<p>6.copy ctor 函数与 copy assignment 区别 P60</p>
+<p>7.RAII P66</p>
+<p>8.数据的封装 P99</p>
+<p>9.this 指针的 trick P121</p>
+<p>10.copy and swap P132</p>
+<p>11.Pimpl P142</p>
+<p>12.纯虚函数的特点 P162</p>
+<p>13.NVI、模板设计模式、策略模式 P170</p>
+<p>14.动态绑定与静态绑定 P180</p>
+<p>15.显式接口与隐式接口 P200</p>
+<hr>
+<h2 id="More_Effective">More Effective</h2><p>1.const 时 reference 与 pointer 的区别</p>
+<p>2.dctor 不会析构半成品 P53</p>
+<p>3.by pointer、ref、name catch exception P68</p>
+<p>4.虚函数、多重继承、虚拟基类、RTTI的主要成本 P121</p>
+<p>5.单例模型 P132</p>
+<p>6.unique_ptr 条款28</p>
+<p>7.share_ptr 条款29</p>
+<p>8.什么时候使用RC P212</p>
+<p>9.double-dispatching 条款31</p>
+<ul>
+<li>如何处理多态</li>
+<li>如何维护</li>
+</ul>
+<p>10.如何设计一个 class P257</p>
+<p>11.继承类中赋值语句的处理 P264</p>
+<p>12.有用的抽象 P267</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/c/" rel="tag">#c++</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/15/cpp-prime-chap-13-16/" rel="next" title="Note in c++ prime 5th (chap13-16)">
+                <i class="fa fa-chevron-left"></i> Note in c++ prime 5th (chap13-16)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -360,6 +498,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/07/14/inside obejct model_e_me/"
+           data-title="深度探索C++对象模型、E、ME笔记" data-url="https://luengzeegin.github.io/2017/07/14/inside obejct model_e_me/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -379,8 +525,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https://avatars0.githubusercontent.com/u/11225229?v=3&u=b3c447bfe8d0842bfc56483c05540fe69ebed1f6&s=140"
@@ -456,6 +611,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#深度探索C++对象模型"><span class="nav-number">1.</span> <span class="nav-text">深度探索C++对象模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Effective_C++"><span class="nav-number">2.</span> <span class="nav-text">Effective C++</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#More_Effective"><span class="nav-number">3.</span> <span class="nav-text">More Effective</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -559,11 +725,9 @@
 
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
 
 
   
